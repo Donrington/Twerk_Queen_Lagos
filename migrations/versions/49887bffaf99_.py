@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 708d20bdc290
+Revision ID: 49887bffaf99
 Revises: 
-Create Date: 2025-03-13 04:55:59.931747
+Create Date: 2025-03-16 11:24:05.628459
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '708d20bdc290'
+revision = '49887bffaf99'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,7 @@ def upgrade():
     sa.Column('username', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password_hash', sa.String(length=255), nullable=False),
+    sa.Column('avatar', sa.String(length=200), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
@@ -37,6 +38,7 @@ def upgrade():
     sa.Column('created_on', sa.DateTime(), nullable=True),
     sa.Column('updated_on', sa.DateTime(), nullable=True),
     sa.Column('is_published', sa.Boolean(), nullable=True),
+    sa.Column('image_url', sa.String(length=300), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('slug')
     )
@@ -58,6 +60,7 @@ def upgrade():
     sa.Column('date_of_birth', sa.Date(), nullable=False),
     sa.Column('passport_photo', sa.String(length=200), nullable=True),
     sa.Column('registered_on', sa.DateTime(), nullable=True),
+    sa.Column('finalist', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )

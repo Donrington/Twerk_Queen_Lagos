@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{pagename}}</title>
 
   <!-- Google Fonts -->
@@ -55,8 +56,8 @@
       <li><a href="{{url_for('admin_blog')}}"><i class="fas fa-blog"></i> Blog &amp; News</a></li>
       <li><a href="{{url_for('admin_blog_new')}}"><i class="fas fa-blog"></i> Create Blog </a></li>
 
-      <li><a href="#"><i class="fas fa-address-book"></i> Contacts</a></li>
-      <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="{{url_for('admin_contacts')}}"><i class="fas fa-address-book"></i> Contacts</a></li>
+      <li><a href="{{url_for('admin_settings')}}"><i class="fas fa-cog"></i> Settings</a></li>
     </ul>
     <div class="sidebar-footer">
       <p>© 2025 TwerkQueenLagos</p>
@@ -81,14 +82,16 @@
 
       <div class="header-right">
         <!-- Dark Mode Toggle -->
-        <div class="theme-toggle">
-          <label for="darkModeToggle" class="darkModeToggleLabel">
-            <input type="checkbox" id="darkModeToggle" />
-            <span class="toggle-handle"></span>
-            <i class="fas fa-moon toggle-icon moon-icon"></i>
-            <i class="fas fa-sun toggle-icon sun-icon"></i>
-          </label>
-        </div>
+   <!-- In your admin_layout.html -->
+      <div class="theme-toggle">
+        <label for="darkModeToggle" class="darkModeToggleLabel">
+          <input type="checkbox" id="darkModeToggle" {% if session.get('dark_mode') %}checked{% endif %}>
+          <span class="toggle-handle"></span>
+          <i class="fas fa-moon toggle-icon moon-icon"></i>
+          <i class="fas fa-sun toggle-icon sun-icon"></i>
+        </label>
+      </div>
+
 
         <!-- Search Bar -->
         <div class="search-bar">
@@ -98,7 +101,11 @@
 
         <!-- User Profile -->
         <div class="user-profile" id="userProfileBtn">
-            <img src="{{('admin.avatar', '/static/avatars/av4.jpg') }}" alt="User" class="user-avatar" />
+          <img src="{{ url_for('static', filename='uploads/' + admin.avatar) if admin.avatar else url_for('static', filename='avatars/av4.jpg') }}" 
+          alt="User" 
+          class="user-avatar" />
+          alt="User" 
+          class="user-avatar" />
             <span class="user-name">{{ admin.username }}</span>
           <i class="fas fa-chevron-down"></i>
 
@@ -240,6 +247,61 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('beforeunload', function() {
   document.querySelector('.loader-overlay').classList.remove('hidden');
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get elements
+  const body = document.body;
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const sidebarLogo = document.querySelector('.sidebar-logo');
+  
+  // Initialize from session
+  const isDarkMode = {% if session.get('dark_mode') %}true{% else %}false{% endif %};
+  
+  // Set initial state
+  if(isDarkMode) {
+    body.classList.add('dark-theme');
+    if(sidebarLogo) {
+      sidebarLogo.src = sidebarLogo.dataset.dark;
+    }
+  }
+
+  // Dark mode toggle handler
+  if(darkModeToggle) {
+    darkModeToggle.addEventListener('change', function() {
+      const isDark = this.checked;
+      body.classList.toggle('dark-theme', isDark);
+      
+      // Update logo
+      if(sidebarLogo) {
+        const newSrc = isDark ? sidebarLogo.dataset.dark : sidebarLogo.dataset.light;
+        fadeImage(sidebarLogo, newSrc);
+      }
+
+      // Update session on server
+      fetch('/update-dark-mode', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token() }}' // Add CSRF protection
+        },
+        body: JSON.stringify({ dark_mode: isDark })
+      });
+    });
+  }
+
+  // Image transition function
+  function fadeImage(element, newSrc) {
+    element.style.opacity = 0;
+    setTimeout(() => {
+      element.src = newSrc;
+      element.style.opacity = 1;
+    }, 200);
+  }
+});
+
+
 
 
   </script>

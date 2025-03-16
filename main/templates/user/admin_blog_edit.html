@@ -1,257 +1,1221 @@
+{%extends 'user/adminlayout.html'%}
+
+
+{%block content%}
+<head>
+  <link rel="stylesheet" href="../../static/css/admindash.css" />
+</head>
 <style>
-    .form-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 2.5rem;
-      background: var(--card-bg);
-      border-radius: calc(var(--border-radius) * 1.5);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 20px 60px -15px var(--shadow-color),
-                 0 0 30px var(--neon-shadow);
-      border: var(--cyber-border);
-      transform: translateY(20px);
-      opacity: 0;
-      animation: formEntry 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.2s forwards;
+  :root {
+  --primary-color: #fa583f; /* Twerk Queen brand accent */
+  --secondary-color: #151515; 
+  --background-color: #f6f6f6;
+  --text-color: #333333;
+  --border-radius: 15px;
+  --transition-speed: 0.3s;
+
+  /* Typography */
+  --font-family-primary: "Montserrat", sans-serif;
+  --font-family-heading: "Poiret One", cursive;
+
+  /* Card / Glass overlays in Light Mode */
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --sidebar-bg: rgba(250, 250, 250, 0.7);
+  --header-bg: rgba(255, 255, 255, 0.75);
+  --shadow-color: rgba(0,0,0,0.1);
+  --hover-overlay: rgba(0,0,0,0.05);
+  --primary-gradient: linear-gradient(135deg, #fa583f 0%, #ff2a5f 100%);
+  --glow-color: rgba(255,88,63,0.4);
+  --cyber-border: 1px solid rgba(255,255,255,0.1);
+  --neon-shadow: 0 0 15px var(--glow-color);
+}
+
+/********** DARK THEME **********/
+body.dark-theme {
+  --background-color: #1f1f1f;
+  --text-color: #fdfdfd;
+  --card-bg: rgba(255,255,255,0.05);
+  --sidebar-bg: rgba(0,0,0,0.2);
+  --header-bg: rgba(255,255,255,0.06);
+  --shadow-color: rgba(0,0,0,0.3);
+  --hover-overlay: rgba(255,255,255,0.1);
+}
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Body Base */
+body {
+  font-family: var(--font-family-primary);
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: background var(--transition-speed), color var(--transition-speed);
+  margin: 0;
+  padding: 0;
+}
+
+/******** Loader Overlay ********/
+
+/* Update Loader CSS */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.loader-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Modern Loader Animation */
+@keyframes pulse {
+  0%, 100% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.loader-overlay .center {
+  display: flex;
+  gap: 15px;
+}
+
+.loader-overlay .dot-1,
+.loader-overlay .dot-2,
+.loader-overlay .dot-3 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.loader-overlay .dot-2 {
+  animation-delay: 0.2s;
+}
+
+.loader-overlay .dot-3 {
+  animation-delay: 0.4s;
+}
+
+
+/******** Sidebar ********/
+/* Hide by default on all screens. Shown when .active is toggled. */
+.dashboard-sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* hidden off-screen */
+  width: 250px;
+  height: 100%;
+  background: var(--sidebar-bg);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--hover-overlay);
+  transition: left var(--transition-speed) ease;
+}
+/* Shown when .active is toggled */
+.dashboard-sidebar.active {
+  left: 0;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.sidebar-logo {
+  width: 80px;
+  margin-bottom: 10px;
+  transition: opacity 0.5s ease; /* fade effect for dark mode swap */
+}
+.sidebar-title {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-family: var(--font-family-heading);
+}
+
+.sidebar-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-grow: 1;
+}
+.sidebar-menu li {
+  width: 100%;
+}
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--text-color);
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: background var(--transition-speed), transform var(--transition-speed);
+}
+.sidebar-menu a i {
+  font-size: 1.2rem;
+  width: 25px;
+  text-align: center;
+}
+.sidebar-menu a:hover {
+  background: var(--hover-overlay);
+  transform: translateX(5px);
+}
+.sidebar-menu a.active {
+  background: rgba(120,32,32, 0.4);
+  border-left: 4px solid var(--primary-color);
+  transform: translateX(5px);
+}
+
+.sidebar-footer {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.85rem;
+  border-top: 1px solid var(--hover-overlay);
+  padding-top: 15px;
+}
+
+/******** Main ********/
+/* No margin by default. Shifts right only if .active is toggled. */
+.dashboard-main {
+  margin-left: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left var(--transition-speed);
+}
+.dashboard-main.active {
+  margin-left: 250px;
+}
+
+/******** Header ********/
+.dashboard-header {
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--hover-overlay);
+  z-index: 100;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+/* Menu Toggle: visible on all screens if you want universal toggling */
+.menu-toggle {
+  display: block;
+  font-size: 1.5em;
+  color: var(--text-color);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s;
+}
+.menu-toggle:hover i {
+  transform: scale(1.1);
+}
+.welcome-message h2 {
+  font-family: var(--font-family-heading);
+  font-size: 1.8rem;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+.welcome-message h2 span {
+  color: var(--primary-color);
+}
+.welcome-message p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/******** Header Right ********/
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+/* Dark Mode Toggle */
+.theme-toggle {
+  position: relative;
+}
+.darkModeToggleLabel {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: var(--hover-overlay);
+  border-radius: 30px;
+  display: inline-block;
+  cursor: pointer;
+}
+.darkModeToggleLabel input[type="checkbox"] {
+  display: none;
+}
+.darkModeToggleLabel .toggle-handle {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  transition: left 0.3s ease, background 0.3s ease;
+}
+.darkModeToggleLabel .moon-icon,
+.darkModeToggleLabel .sun-icon {
+  position: absolute;
+  top: 5px;
+  color: #fff;
+  font-size: 0.85rem;
+}
+.moon-icon { left: 8px; }
+.sun-icon { right: 8px; }
+.darkModeToggleLabel input:checked + .toggle-handle {
+  left: 33px;
+  background: #666;
+}
+
+/* Search Bar */
+.search-bar {
+  position: relative;
+  width: 200px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 8px 40px 8px 12px;
+  border: none;
+  border-radius: 20px;
+  background: var(--hover-overlay);
+  color: var(--text-color);
+  outline: none;
+}
+.search-bar i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+}
+
+/* User Profile & Dropdown */
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 110;
+}
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-name {
+  font-size: 0.9rem;
+}
+.user-profile i {
+  color: var(--primary-color);
+  transition: transform 0.3s;
+}
+.user-profile:hover i {
+  transform: rotate(180deg);
+}
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background-color: var(--card-background);
+  backdrop-filter: blur(20px);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px) scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.user-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+
+.user-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.user-dropdown li {
+  width: 100%;
+}
+
+.user-dropdown li a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1em;
+  gap: 15px;
+}
+
+.user-dropdown li a:hover {
+  background-color: var(--glass-color);
+  color: var(--primary-color);
+}
+
+.user-dropdown li a i {
+  font-size: 1.2em;
+  color: var(--primary-color);
+  transition: transform 0.3s;
+}
+
+.user-dropdown-menu li a:hover i {
+  transform: translateX(5px);
+}
+
+.user-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent var(--card-background) transparent;
+  filter: blur(0.5px);
+}
+.user-profile:hover i {
+  transform: rotate(180deg);
+}
+
+/******** Dashboard Content ********/
+.dashboard-content {
+  padding: 30px;
+  flex-grow: 1;
+}
+.stats-grid {
+  display: grid;
+    gap: 30px;
+}
+.stats-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  display: flex;
+  text-align: center;
+  color: var(--text-color);
+  justify-content: space-between;
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
+}
+.stats-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 var(--shadow-color);
+}
+
+
+
+.stats-card::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
+  top: -50%;
+  left: -50%;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+}
+
+.stats-card:hover::before {
+  opacity: 1;
+}
+
+.stats-card-title {
+  font-family: var(--font-family-heading);
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+.stats-card-value {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.stats-card-icon {
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  font-size: 4.5rem;
+  color: rgba(250,88,63,0.1);
+}
+
+/********** Responsive Adjustments **********/
+@media (max-width: 992px) {
+  .welcome-message h2 {
+    font-size: 1.5rem;
+  }
+  .stats-card-title {
+    font-size: 1.1rem;
+  }
+  .stats-card-value {
+    font-size: 1.7rem;
+  }
+}
+
+/* Because we can now toggle at any width, we remove forced open at large sizes */
+@media (max-width: 768px) {
+  /* Optional: hide search bar on small screens */
+  .search-bar {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .header-left,
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr; /* single column on very small screens */
+    gap: 15px;
+  }
+}
+
+/********** Dark Theme Colors **********/
+body.dark-theme {
+  background: #1f1f1f;
+  color: #fdfdfd;
+}
+body.dark-theme .dashboard-sidebar {
+  background: rgba(0,0,0,0.2);
+}
+body.dark-theme .sidebar-menu a {
+  color: #fdfdfd;
+}
+body.dark-theme .sidebar-menu a:hover {
+  background: rgba(255,255,255,0.1);
+}
+body.dark-theme .dashboard-header {
+  background: rgba(255,255,255,0.06);
+}
+body.dark-theme .stats-card {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+body.dark-theme .stats-card:hover {
+  box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+}
+
+
+/* Add this to your existing CSS */
+
+/* Active Link Handling */
+.dashboard-sidebar .sidebar-menu a.active {
+  background: rgba(250, 88, 63, 0.2) !important;
+  border-left: 4px solid var(--primary-color) !important;
+  transform: translateX(5px);
+}
+
+/* Mobile Responsive Sidebar */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    width: 280px;
+    left: -280px;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dashboard-sidebar.active {
+    left: 0;
+  }
+  
+  .dashboard-main {
+    margin-left: 0;
+  }
+  
+  .menu-toggle {
+    display: block !important;
+    z-index: 1001;
+  }
+  
+  /* Overlay for mobile */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+  
+  .dashboard-sidebar.active + .sidebar-overlay {
+    display: block;
+  }
+}
+
+
+
+
+
+/********** End **********/
+
+
+
+
+
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  perspective: 1000px;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: calc(var(--border-radius) * 2);
+  backdrop-filter: blur(20px);
+  border: var(--cyber-border);
+  box-shadow: var(--neon-shadow), 0 40px 60px -20px var(--shadow-color);
+  transform-style: preserve-3d;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: top center;
+}
+
+/* Cyberpunk-style Table Header */
+thead {
+  background: var(--primary-gradient);
+  position: relative;
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+thead::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255,255,255,0.6) 50%, 
+    transparent 100%);
+  animation: headerGlow 2s infinite;
+}
+
+@keyframes headerGlow {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+th {
+  padding: 1.5rem;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  position: relative;
+  backdrop-filter: blur(5px);
+}
+
+th:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background: linear-gradient(transparent, rgba(255,255,255,0.3), transparent);
+}
+
+/* Holographic Table Rows */
+tbody tr {
+  transition: all 0.3s ease;
+  position: relative;
+  animation: rowEntry 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes rowEntry {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,0.03);
+  transform: translateX(10px);
+  box-shadow: -5px 0 15px var(--glow-color);
+}
+
+td {
+  padding: 1.5rem;
+  border-bottom: var(--cyber-border);
+  color: var(--text-color);
+  position: relative;
+  backdrop-filter: blur(2px);
+}
+
+/* Neon Image Containers */
+td img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--neon-shadow);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+
+td img:hover {
+  transform: scale(2.5) translateY(20px) rotate(5deg);
+  z-index: 100;
+  box-shadow: 0 0 30px var(--glow-color);
+}
+
+/* Cyberpunk Scrollbar */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+/* Holographic Effect */
+table::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.1),
+    transparent
+  );
+  animation: hologram 3s infinite;
+}
+
+@keyframes hologram {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-container {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+  }
+  
+  th, td {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  td img {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  table {
+    min-width: 600px;
+  }
+  
+  .table-container {
+    border-radius: calc(var(--border-radius) * 1.5);
+    box-shadow: 0 20px 40px var(--shadow-color);
+  }
+}
+
+/* Dark Mode Enhancements */
+body.dark-theme table {
+  --cyber-border: 1px solid rgba(255,255,255,0.05);
+  --neon-shadow: 0 0 25px rgba(250,88,63,0.3);
+}
+
+body.dark-theme td img {
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 15px rgba(250,88,63,0.2);
+}
+
+.dashboard-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  font-family: var(--font-family-heading);
+  text-transform: uppercase;
+  color: var(--primary-color);
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+/* Underline effect */
+.dashboard-content h2::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-color);
+  margin: 8px auto 0;
+  border-radius: 2px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.dashboard-content h2:hover::after {
+  width: 120px;
+}
+
+/* Dark Mode Support */
+body.dark-theme .dashboard-content h2 {
+  color: #fff;
+}
+
+body.dark-theme .dashboard-content h2::after {
+  background: #fa583f;
+}
+
+
+.delete-btn {
+  --delete-red: linear-gradient(145deg, #ff3b3b 0%, #d00000 100%);
+  --cyber-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+  position: relative;
+  background: var(--delete-red);
+  color: rgba(255,255,255,0.95);
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--cyber-shadow),
+              inset 0 2px 4px rgba(255,255,255,0.2),
+              inset 0 -2px 4px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.delete-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.3),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 59, 59, 0.4),
+              inset 0 2px 4px rgba(255,255,255,0.3),
+              inset 0 -2px 4px rgba(0,0,0,0.1);
+  background: linear-gradient(145deg, #ff4d4d 0%, #e60000 100%);
+}
+
+.delete-btn:hover::before {
+  left: 150%;
+}
+
+.delete-btn:active {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.9);
+  box-shadow: 0 2px 10px rgba(255, 59, 59, 0.2),
+              inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.delete-btn::after {
+  content: "🗑";
+  margin-left: 8px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+  transition: transform 0.3s ease;
+}
+
+.delete-btn:hover::after {
+  transform: rotate(15deg) scale(1.2);
+}
+
+/* Dark Mode Enhancements */
+body.dark-theme .delete-btn {
+  --delete-red: linear-gradient(145deg, #ff1a1a 0%, #990000 100%);
+  --cyber-shadow: 0 4px 20px rgba(255, 26, 26, 0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: var(--cyber-shadow),
+              inset 0 2px 4px rgba(255,255,255,0.1),
+              inset 0 -2px 4px rgba(0,0,0,0.3);
+}
+
+body.dark-theme .delete-btn:hover {
+  box-shadow: 0 8px 30px rgba(255, 26, 26, 0.35),
+              inset 0 2px 4px rgba(255,255,255,0.2),
+              inset 0 -2px 4px rgba(0,0,0,0.2);
+}
+
+/* Loading Animation */
+.delete-btn.loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.delete-btn.loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+
+
+  .form-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: var(--card-bg);
+    border-radius: calc(var(--border-radius) * 1.5);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px -15px var(--shadow-color),
+               0 0 30px var(--neon-shadow);
+    border: var(--cyber-border);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: formEntry 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.2s forwards;
+  }
+  
+  @keyframes formEntry {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-    
-    @keyframes formEntry {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+  }
+  
+
+  .form-container h2 {
+    font-family: var(--font-family-heading);
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 15px var(--glow-color);
+  }
+  
+  .form-group {
+    margin-bottom: 2rem;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: formGroupEntry 0.4s ease forwards;
+  }
+  
+  @keyframes formGroupEntry {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background: rgba(255,255,255,0.05);
+  border: 1px solid rgb(190, 186, 186);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--glow-color);
+    background: rgba(255,255,255,0.1);
+  }
+  
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.4);
+  }
+  
+  /* Floating Label Effect */
+  .form-group:focus-within label {
+    transform: translateY(-10px);
+    font-size: 0.9rem;
+    color: var(--primary-color);
+  }
+  
+  /* Custom Checkbox */
+  .form-group.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .checkbox-container {
+    position: relative;
+    width: 50px;
+    height: 26px;
+  }
+  
+  .checkbox-container input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .checkbox-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.1);
+    transition: 0.4s;
+    border-radius: 34px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .checkbox-slider:before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background: rgba(255,255,255,0.8);
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .checkbox-slider {
+    background: var(--primary-color);
+  }
+  
+  input:checked + .checkbox-slider:before {
+    transform: translateX(24px);
+    background: white;
+  }
+  
+  .btn-submit {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 1.2rem 2.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--glow-color);
+  }
+  
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px var(--glow-color);
+  }
+  
+  .btn-submit:active {
+    transform: translateY(0);
+  }
+  
+  /* Loading Animation */
+  .btn-submit.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+  /* Dark Mode Adjustments */
+  body.dark-theme .form-group input,
+  body.dark-theme .form-group textarea {
+    background: rgba(0,0,0,0.2);
+    border-color: rgba(255,255,255,0.05);
+  }
+  
+  body.dark-theme .checkbox-slider {
+    background: rgba(0,0,0,0.3);
+  }
+  
+  @media (max-width: 768px) {
+    .form-container {
+      margin: 1rem;
+      padding: 1.5rem;
     }
     
     .form-container h2 {
-      font-family: var(--font-family-heading);
-      font-size: 2.5rem;
-      color: var(--primary-color);
-      text-align: center;
-      margin-bottom: 2.5rem;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 15px var(--glow-color);
-    }
-    
-    .form-group {
-      margin-bottom: 2rem;
-      position: relative;
-      opacity: 0;
-      transform: translateX(-20px);
-      animation: formGroupEntry 0.4s ease forwards;
-    }
-    
-    @keyframes formGroupEntry {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 0.8rem;
-      font-weight: 600;
-      color: var(--text-color);
-      font-size: 1.1rem;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-    }
-    
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1.2rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--border-radius);
-      color: var(--text-color);
-      font-size: 1rem;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(5px);
-    }
-    
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 15px var(--glow-color);
-      background: rgba(255,255,255,0.1);
-    }
-    
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: rgba(255,255,255,0.4);
-    }
-    
-    /* Floating Label Effect */
-    .form-group:focus-within label {
-      transform: translateY(-10px);
-      font-size: 0.9rem;
-      color: var(--primary-color);
-    }
-    
-    /* Custom Checkbox */
-    .form-group.checkbox-group {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    
-    .checkbox-container {
-      position: relative;
-      width: 50px;
-      height: 26px;
-    }
-    
-    .checkbox-container input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    
-    .checkbox-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255,255,255,0.1);
-      transition: 0.4s;
-      border-radius: 34px;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .checkbox-slider:before {
-      content: "";
-      position: absolute;
-      height: 18px;
-      width: 18px;
-      left: 4px;
-      bottom: 3px;
-      background: rgba(255,255,255,0.8);
-      transition: 0.4s;
-      border-radius: 50%;
-    }
-    
-    input:checked + .checkbox-slider {
-      background: var(--primary-color);
-    }
-    
-    input:checked + .checkbox-slider:before {
-      transform: translateX(24px);
-      background: white;
+      font-size: 2rem;
     }
     
     .btn-submit {
-      background: var(--primary-gradient);
-      color: white;
-      border: none;
-      padding: 1.2rem 2.5rem;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 30px var(--glow-color);
+      padding: 1rem 2rem;
     }
-    
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px var(--glow-color);
-    }
-    
-    .btn-submit:active {
-      transform: translateY(0);
-    }
-    
-    /* Loading Animation */
-    .btn-submit.loading::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 24px;
-      height: 24px;
-      border: 3px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-    
-    /* Dark Mode Adjustments */
-    body.dark-theme .form-group input,
-    body.dark-theme .form-group textarea {
-      background: rgba(0,0,0,0.2);
-      border-color: rgba(255,255,255,0.05);
-    }
-    
-    body.dark-theme .checkbox-slider {
-      background: rgba(0,0,0,0.3);
-    }
-    
-    @media (max-width: 768px) {
-      .form-container {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
+  }
+  </style>
+  
+  <div class="form-container">
+    <h2>Edit Blog Post</h2>
+    <form method="POST" action="{{ url_for('admin_blog_edit', post_id=post.id) }}">
+      <!-- Form groups with staggered animations -->
+      <div class="form-group" style="animation-delay: 0.1s">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="{{ post.title }}" required>
+      </div>
       
-      .form-container h2 {
-        font-size: 2rem;
-      }
+      <div class="form-group" style="animation-delay: 0.2s">
+        <label for="slug">Slug</label>
+        <input type="text" name="slug" id="slug" value="{{ post.slug }}" required>
+      </div>
       
-      .btn-submit {
-        padding: 1rem 2rem;
-      }
-    }
-    </style>
-    
-    <div class="form-container">
-      <h2>Edit Blog Post</h2>
-      <form method="POST" action="{{ url_for('admin_blog_edit', post_id=post.id) }}">
-        <!-- Form groups with staggered animations -->
-        <div class="form-group" style="animation-delay: 0.1s">
-          <label for="title">Title</label>
-          <input type="text" name="title" id="title" value="{{ post.title }}" required>
+      <div class="form-group" style="animation-delay: 0.3s">
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" value="{{ post.author }}">
+      </div>
+      
+      <div class="form-group" style="animation-delay: 0.4s">
+        <label for="image_url">Image URL</label>
+        <input type="text" name="image_url" id="image_url" value="{{ post.image_url }}">
+      </div>
+      
+      <div class="form-group" style="animation-delay: 0.5s">
+        <label for="content">Content</label>
+        <textarea name="content" id="content" required>{{ post.content }}</textarea>
+      </div>
+      
+      <div class="form-group checkbox-group" style="animation-delay: 0.6s">
+        <label for="is_published">Published?</label>
+        <div class="checkbox-container">
+          <input type="checkbox" name="is_published" id="is_published" value="1" 
+                 {% if post.is_published %}checked{% endif %}>
+          <span class="checkbox-slider"></span>
         </div>
-        
-        <div class="form-group" style="animation-delay: 0.2s">
-          <label for="slug">Slug</label>
-          <input type="text" name="slug" id="slug" value="{{ post.slug }}" required>
-        </div>
-        
-        <div class="form-group" style="animation-delay: 0.3s">
-          <label for="author">Author</label>
-          <input type="text" name="author" id="author" value="{{ post.author }}">
-        </div>
-        
-        <div class="form-group" style="animation-delay: 0.4s">
-          <label for="image_url">Image URL</label>
-          <input type="text" name="image_url" id="image_url" value="{{ post.image_url }}">
-        </div>
-        
-        <div class="form-group" style="animation-delay: 0.5s">
-          <label for="content">Content</label>
-          <textarea name="content" id="content" required>{{ post.content }}</textarea>
-        </div>
-        
-        <div class="form-group checkbox-group" style="animation-delay: 0.6s">
-          <label for="is_published">Published?</label>
-          <div class="checkbox-container">
-            <input type="checkbox" name="is_published" id="is_published" value="1" 
-                   {% if post.is_published %}checked{% endif %}>
-            <span class="checkbox-slider"></span>
-          </div>
-        </div>
-        
-        <button type="submit" class="btn-submit">Update Post ✨</button>
-      </form>
-    </div>
+      </div>
+      
+      <button type="submit" class="btn-submit">Update Post ✨</button>
+    </form>
+  </div>
+
+{%endblock content%}

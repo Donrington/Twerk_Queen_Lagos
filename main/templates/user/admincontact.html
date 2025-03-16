@@ -1,0 +1,124 @@
+{% extends 'user/adminlayout.html' %}
+
+{% block content %}
+
+<style>
+    /* Contact Form Styling */
+.form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.status-resolved {
+  color: #4CAF50;
+  padding: 5px 10px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 20px;
+}
+
+.status-pending {
+  color: #FF9800;
+  padding: 5px 10px;
+  background: rgba(255, 152, 0, 0.1);
+  border-radius: 20px;
+}
+
+.btn-view {
+  background: var(--primary-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn-toggle {
+  background: #2196F3;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pagination a {
+  padding: 8px 12px;
+  background: var(--card-bg);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background: var(--primary-color);
+  color: white;
+}
+</style>
+<section class="dashboard-content">
+  <h2>Contact Messages</h2>
+  
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for message in messages.items %}
+        <tr>
+          <td>{{ message.id }}</td>
+          <td>{{ message.name }}</td>
+          <td>{{ message.email }}</td>
+          <td>{{ message.message|truncate(50) }}</td>
+          <td>{{ message.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
+          <td>
+            {% if message.is_resolved %}
+              <span class="status-resolved">Resolved</span>
+            {% else %}
+              <span class="status-pending">Pending</span>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('view_message', message_id=message.id) }}" class="btn-view">View</a>
+            <form method="POST" action="{{ url_for('toggle_resolved', message_id=message.id) }}" style="display: inline;">
+              <button type="submit" class="btn-toggle">
+                {{ 'Mark Pending' if message.is_resolved else 'Mark Resolved' }}
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    <!-- Pagination -->
+    <div class="pagination">
+      {% for page_num in messages.iter_pages() %}
+        {% if page_num %}
+          <a href="{{ url_for('admin_contacts', page=page_num) }}" 
+             class="{% if page_num == messages.page %}active{% endif %}">
+            {{ page_num }}
+          </a>
+        {% else %}
+          <span class="ellipsis">...</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

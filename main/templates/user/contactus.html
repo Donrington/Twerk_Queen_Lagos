@@ -90,19 +90,28 @@
   <section class="contact-hero-section">
     <div class="contact-hero-background">
       <div class="contact-hero-container">
-        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
         <!-- Left Side: Contact Form -->
         <div class="contact-hero-form" data-aos="fade-left" data-aos-duration="800">
           <h3 class="form-title">We'd love to hear from you!</h3>
-          <form>
+          <form method="POST" action="{{ url_for('contact') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <label for="name">Your Name</label>
-            <input type="text" id="name" placeholder="Enter your name" />
+            <input type="text" id="name" name="name" placeholder="Enter your name" />
   
             <label for="email">Your Email</label>
-            <input type="email" id="email" placeholder="Enter your email" />
+            <input type="email" id="email" name="email" placeholder="Enter your email" />
   
             <label for="message">Your Message</label>
-            <textarea id="message" rows="5" placeholder="Write your message..."></textarea>
+            <textarea id="message" rows="5" name="message" placeholder="Write your message..."></textarea>
   
             <button type="submit" class="submit-btn">Submit</button>
           </form>
@@ -130,8 +139,6 @@
       </div>
     </div>
   </section>
-  
-
 
 
   <section class="faq-section">

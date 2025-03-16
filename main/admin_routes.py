@@ -16,6 +16,7 @@ from app import *
 from main import *
 from main.forms import *
 from main.models import *
+from PIL import Image
 from flask_login import login_required
 from main.models import db
 from sqlalchemy import func,desc  
@@ -56,9 +57,7 @@ def init_routes(app):
     def admin_users():
         return render_template('user/users.html', paagname="Manage Users")
 
-    @app.route('/admin/settings')
-    def admin_settings():
-        return render_template('user/settings.html', paagname="Admin Settings")
+  
     
   
 
@@ -137,42 +136,42 @@ def init_routes(app):
     if not os.path.exists(app.config['ADMIN_PROFILE_PATH']):
         os.makedirs(app.config['ADMIN_PROFILE_PATH'])
 
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+    # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
-    def allowed_file(filename):
-        """Check if the file extension is allowed."""
-        return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    # def allowed_file(filename):
+    #     """Check if the file extension is allowed."""
+    #     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-    @app.route('/admin/profile', methods=['POST'])
-    @admin_login_required
-    def upload_avatar():
-        if 'avatar' not in request.files or request.files['avatar'].filename == '':
-            flash('No file uploaded.', 'danger')
-            return redirect(url_for('admin_dashboard'))
+    # @app.route('/admin/profile', methods=['POST'])
+    # @admin_login_required
+    # def upload_avatar():
+    #     if 'avatar' not in request.files or request.files['avatar'].filename == '':
+    #         flash('No file uploaded.', 'danger')
+    #         return redirect(url_for('admin_dashboard'))
 
-        file = request.files['avatar']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['ADMIN_PROFILE_PATH'], filename)
-            file.save(file_path)
+    #     file = request.files['avatar']
+    #     if file and allowed_file(file.filename):
+    #         filename = secure_filename(file.filename)
+    #         file_path = os.path.join(app.config['ADMIN_PROFILE_PATH'], filename)
+    #         file.save(file_path)
 
-            # Update the admin's avatar in the database
-            admin = Admin.query.get(session['id'])
-            if admin:
-                admin.avatar = f"/{app.config['ADMIN_PROFILE_PATH']}/{filename}"  # Store relative path
-                db.session.commit()
+    #         # Update the admin's avatar in the database
+    #         admin = Admin.query.get(session['id'])
+    #         if admin:
+    #             admin.avatar = f"/{app.config['ADMIN_PROFILE_PATH']}/{filename}"  # Store relative path
+    #             db.session.commit()
 
-                # Update session
-                session['avatar'] = admin.avatar
+    #             # Update session
+    #             session['avatar'] = admin.avatar
 
-                flash('Avatar updated successfully.', 'success')
-            else:
-                flash('Admin not found.', 'danger')
+    #             flash('Avatar updated successfully.', 'success')
+    #         else:
+    #             flash('Admin not found.', 'danger')
 
-            return redirect(url_for('admin_dashboard'))
+    #         return redirect(url_for('admin_dashboard'))
 
-        flash('Invalid file type. Allowed: png, jpg, jpeg, gif.', 'danger')
-        return redirect(url_for('admin_dashboard'))
+    #     flash('Invalid file type. Allowed: png, jpg, jpeg, gif.', 'danger')
+    #     return redirect(url_for('admin_dashboard'))
         
     @app.before_request
     def set_csrf_token():
@@ -394,6 +393,100 @@ def init_routes(app):
         db.session.commit()
         flash('Blog post deleted.', 'info')
         return redirect(url_for('admin_blog'))
+
+       # Admin route for viewing messages
+    @app.route('/admin/contacts')
+    @admin_login_required # Assuming you have admin authentication
+    def admin_contacts():
+        admin = Admin.query.get(session.get('id'))
+        page = request.args.get('page', 1, type=int)
+        messages = ContactMessage.query.order_by(ContactMessage.created_at.desc()).paginate(page=page, per_page=10)
+        return render_template('user/admincontact.html', messages=messages, admin=admin, pagename="Contact Messages")
+       
+
+
+    @app.route('/admin/message/<int:message_id>')
+    @admin_login_required
+    def view_message(message_id):
+        admin = Admin.query.get(session.get('id'))
+        message = ContactMessage.query.get_or_404(message_id)
+        return render_template('user/view_message.html', message=message, admin=admin)
+
+    @app.route('/admin/toggle-resolved/<int:message_id>', methods=['POST'])
+    @admin_login_required
+    @csrf.exempt
+    def toggle_resolved(message_id):
+        message = ContactMessage.query.get_or_404(message_id)
+        message.is_resolved = not message.is_resolved
+        db.session.commit()
+        flash('Message status updated', 'success')
+        return redirect(url_for('admin_contacts'))
+
+
+    @app.route('/admin/settings', methods=['GET', 'POST'])
+    @admin_login_required
+    def admin_settings():
+        admin = Admin.query.get(session.get('id'))
+        
+        if request.method == 'POST':
+            # Handle avatar upload
+            if 'avatar' in request.files:
+                avatar = request.files['avatar']
+                if avatar.filename != '':
+                    if not allowed_file(avatar.filename):
+                        flash('Invalid file type', 'error')
+                        return redirect(url_for('admin_settings'))
+                    
+                    filename = secure_filename(avatar.filename)
+                    upload_folder = os.path.join(app.config['ADMIN_PROFILE_PATH'], 'avatars')
+                    os.makedirs(upload_folder, exist_ok=True)
+                    avatar_path = os.path.join(upload_folder, filename)
+                    
+                    try:
+                        with Image.open(avatar) as img:
+                            img.thumbnail((300, 300))
+                            img.save(avatar_path)
+                            admin.avatar = f"admins/{filename}"
+                    except Exception as e:
+                        flash('Error processing image', 'error')
+                        return redirect(url_for('admin_settings'))
+
+            # Handle password change
+            current_password = request.form.get('current_password')
+            new_password = request.form.get('new_password')
+            confirm_password = request.form.get('confirm_password')
+            
+            if new_password or confirm_password:
+                if not current_password:
+                    flash('Current password is required', 'error')
+                elif new_password != confirm_password:
+                    flash('New passwords do not match', 'error')
+                elif not admin.check_password(current_password):
+                    flash('Current password is incorrect', 'error')
+                else:
+                    admin.set_password(new_password)
+                    flash('Password updated successfully', 'success')
+
+            db.session.commit()
+            flash('Settings updated successfully', 'success')
+            return redirect(url_for('admin_settings'))
+
+        return render_template('user/admin_settings.html', 
+                            pagename="Account Settings",  
+                            admin=admin)
+# Add this helper function for file validation
+    def allowed_file(filename):
+        ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+        return '.' in filename and \
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+    @app.route('/update-dark-mode', methods=['POST'])
+    @admin_login_required
+    @csrf.exempt
+    def update_dark_mode():
+        
+        session['dark_mode'] = request.json.get('dark_mode', False)
+        return jsonify(success=True)@app.route('/update-dark-mode', methods=['POST'])
 
 def admin_login_required(f):
     @wraps(f)

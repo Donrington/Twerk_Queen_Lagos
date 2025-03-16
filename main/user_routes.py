@@ -44,9 +44,34 @@ def init_routes(app):
     def aboutus():
         return render_template('user/aboutus.html', pagename="TwerkQueenLagos | About")
 
-    @app.route('/contact')
+    # Add to your routes.py
+    @app.route('/contact', methods=['GET', 'POST'])
     def contact():
+        if request.method == 'POST':
+            try:
+                name = request.form['name']
+                email = request.form['email']
+                message = request.form['message']
+                
+                new_message = ContactMessage(
+                    name=name,
+                    email=email,
+                    message=message
+                )
+                
+                db.session.add(new_message)
+                db.session.commit()
+                flash('Your message has been sent successfully!', 'success')
+                return redirect(url_for('contact'))
+                
+            except Exception as e:
+                db.session.rollback()
+                flash('Error sending message. Please try again.', 'error')
+                return redirect(url_for('contact'))
+        
         return render_template('user/contactus.html', pagename="TwerkQueenLagos | Contact")
+
+
 
     @app.route('/weeklyaudition')
     def weeklyaudition():
