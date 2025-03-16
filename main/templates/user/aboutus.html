@@ -1,0 +1,597 @@
+{%extends 'user/generallayout.html'%}
+
+{%block customcss%}
+
+<link rel="stylesheet" href="../../static/css/about.css">
+{%endblock customcss%}
+
+  {%block banner%}
+
+
+  <section class="about-hero">
+    <div class="hero-overlay"></div> <!-- Optional gradient overlay -->
+  
+    <div class="hero-content">
+      <!-- Mini Tagline in Montserrat -->
+      <p class="mini-tagline">The Story Behind Twerk Queen Lagos</p>
+      
+      <!-- Hero Title in Poiret One -->
+      <h1 class="hero-title">About Us</h1>
+      
+      <!-- Hero Subtitle in Montserrat -->
+      <p class="hero-subtitle">
+        Discover the passion, energy, and drive that brought
+        Twerk Queen Lagos to life. Learn how we’re uniting
+        dance enthusiasts from every corner to celebrate
+        creativity, empowerment, and self-expression.
+      </p>
+      
+      <!-- Down Arrow Link -->
+      <a href="#countdown" class="down-arrow">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  {%endblock banner%}
+  
+  
+  
+
+  {%block content%}
+   
+
+
+  
+  <section class="classes-section">
+    <div class="classes-container">
+      
+      <!-- Badge & Title -->
+      <span class="classes-badge" data-aos="fade-down" data-aos-duration="800">
+        Our Monthly Showdowns
+      </span>
+      <h2 class="classes-title" data-aos="fade-down" data-aos-duration="900">
+        Dare to Step on Stage
+      </h2>
+      
+      <!-- Short Description / Hook -->
+      <p class="classes-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        No formal training required—prove your self-taught twerk skills! 
+        Every month, new talents rise, and returning champions fall. Join 
+        the action, survive the auditions, and secure your spot at our 
+        final showdown every <strong>Last Monday</strong> of the month.
+      </p>
+      
+      <!-- Card Grid -->
+      <div class="classes-grid">
+        
+        <!-- Card 1 -->
+        <div class="class-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="class-image">
+            <!-- Replace with your own image -->
+            <img src="../../static/illustration/undraw11.png" alt="Weekly Auditions">
+          </div>
+          <h3 class="class-heading">Weekly Auditions</h3>
+          <p class="class-description">
+            Show us what you’ve got! Each week, new dancers step up to claim 
+            their spot. Only the fiercest twerkers survive to face the monthly stage.
+          </p>
+          <a href="#" class="class-link">View Details &rarr;</a>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="class-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="class-image">
+            <img src="../../static/illustration/undraw12.png" alt="Elimination Rounds">
+          </div>
+          <h3 class="class-heading">Elimination Rounds</h3>
+          <p class="class-description">
+            Self-taught or seasoned pro, you'll battle it out to stay in the game! 
+            Knockout eliminations ensure only top contenders reach the finals.
+          </p>
+          <a href="#" class="class-link">View Details &rarr;</a>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="class-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="class-image">
+            <img src="../../static/illustration/undraw13.png" alt="Wildcard Battle">
+          </div>
+          <h3 class="class-heading">Wildcard Battle</h3>
+          <p class="class-description">
+            Missed your chance? Win a coveted wildcard slot! Unleash your 
+            twerk arsenal and take the stage by storm—no mentors, no mercy.
+          </p>
+          <a href="#" class="class-link">View Details &rarr;</a>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="class-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="class-image">
+            <img src="../../static/illustration/undraw14.png" alt="Final Showdown">
+          </div>
+          <h3 class="class-heading">Final Showdown</h3>
+          <p class="class-description">
+            One night. One stage. One champion. Every last Monday, the 
+            undefeated face off for the grand prize—pulsating rhythms 
+            and a N10M check on the line!
+          </p>
+          <a href="#" class="class-link">View Details &rarr;</a>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+
+
+  <section class="why-us-section">
+    <div class="why-container">
+      <!-- Left: Image -->
+      <div class="why-image" data-aos="fade-right" data-aos-duration="900">
+        <img src="../../static/twerkqueen/twerkqueen7.jpeg" alt="Why Twerk Queen Lagos" loading="lazy">
+      </div>
+  
+      <!-- Right: Content & Accordion -->
+      <div class="why-content" data-aos="fade-left" data-aos-duration="900">
+        <span class="why-badge">Our Benefits</span>
+        <h2 class="why-title">Why Twerk Queen Lagos?</h2>
+  
+        <div class="why-accordion">
+  
+          <!-- Accordion Item 1 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3 class="accordion-title">Transform Your Passion</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>
+                Whether you're self-taught or a seasoned performer, Twerk Queen Lagos 
+                offers an unparalleled platform to turn your raw talent into an 
+                unforgettable performance. Challenge yourself, gain massive exposure, 
+                and push your creative boundaries.
+              </p>
+            </div>
+          </div>
+  
+          <!-- Accordion Item 2 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3 class="accordion-title">Massive Cash Prizes</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>
+                Stand a chance to win <strong>N10 million</strong> every last Monday of 
+                the month. No complicated rules—just show up, shake it, and 
+                let your fans and the judges decide who takes home the epic reward.
+              </p>
+            </div>
+          </div>
+  
+          <!-- Accordion Item 3 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3 class="accordion-title">Community & Networking</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>
+                Become part of an ever-growing dance family. Build friendships, 
+                connect with top influencers, and open doors to new performance 
+                opportunities—both locally and globally.
+              </p>
+            </div>
+          </div>
+  
+          <!-- Accordion Item 4 -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3 class="accordion-title">Adrenaline-Fueled Events</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>
+                Experience heart-thumping music, electrifying lights, 
+                and an audience hungry for jaw-dropping dance moves. 
+                Twerk Queen Lagos is more than a competition—it's a 
+                roller coaster of pure energy and self-expression.
+              </p>
+            </div>
+          </div>
+  
+        </div>
+      </div> <!-- .why-content -->
+    </div> <!-- .why-container -->
+  </section>
+  
+<!-- IMPACT SECTION -->
+<section class="impact-section">
+    <div class="impact-container">
+      <!-- Left Side: Badge & Description -->
+      <div class="impact-left" data-aos="fade-right" data-aos-duration="900">
+        <span class="impact-badge">Our Impact</span>
+        <p class="impact-intro">
+          Twerk Queen Lagos has sparked a dance revolution—here’s a quick look at 
+          our ever‐growing influence. From fierce twerkers taking the stage to 
+          dedicated fans cheering on epic showdowns every month!
+        </p>
+      </div>
+  
+      <!-- Right Side: Numbers / Stats -->
+      <div class="impact-right" data-aos="fade-left" data-aos-duration="900">
+        <div class="numbers-grid">
+          <!-- Stat 1 -->
+          <div class="number-card">
+            <h3 class="number" data-target="100">0</h3>
+            <p class="number-label">Registered Twerkers</p>
+          </div>
+          <!-- Stat 2 -->
+          <div class="number-card">
+            <h3 class="number" data-target="50">0</h3>
+            <p class="number-label">Monthly Showdowns</p>
+          </div>
+          <!-- Stat 3 -->
+          <div class="number-card">
+            <h3 class="number" data-target="5">0</h3>
+            <p class="number-label">Cities Reached</p>
+          </div>
+          <!-- Stat 4 -->
+          <div class="number-card">
+            <h3 class="number" data-target="10">0</h3>
+            <p class="number-label">Grand Champions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials-section">
+    <div class="testimonials-container">
+  
+      <!-- Left Side: Image -->
+      <div class="testimonial-image" id="testimonialImageWrapper" data-aos="fade-right" data-aos-duration="900">
+        <img id="testimonialImage" 
+             src="../../static/twerkqueen/tweekqueen2.jpeg" 
+             alt="Testimonial" 
+             loading="lazy" />
+      </div>
+  
+      <!-- Right Side: Testimonial Content -->
+      <div class="testimonial-content" id="testimonialContent" data-aos="fade-left" data-aos-duration="900">
+        <span class="testimonial-badge">Testimonials</span>
+        <h2 class="testimonial-title">What Our Twerkers Say</h2>
+  
+        <p class="testimonial-quote" id="testimonialQuote">
+          <!-- Populated by JS -->
+        </p>
+        <span class="testimonial-author" id="testimonialAuthor">
+          <!-- Populated by JS -->
+        </span>
+  
+        <!-- Navigation Arrows -->
+        <div class="testimonial-nav">
+          <button class="nav-arrow" id="prevBtn">&#8592;</button>
+          <button class="nav-arrow" id="nextBtn">&#8594;</button>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+
+
+
+<!-- NEW SECTION: Video bridging from black to white background -->
+<section class="video-cut-section">
+    <!-- Fullwidth container for the partial overlap effect -->
+    <div class="video-cut-container">
+      
+      <!-- Background Text in Poiret One -->
+      <h2 class="video-bg-text">Feel the Rhythm</h2>
+      
+      <!-- Centered Video with max-width 1200px -->
+      <div class="video-wrapper">
+        <div class="video-overlay"></div>
+        <video 
+          class="twerk-video" 
+          src="../../static/animation/RENDER1.mp4" 
+          autoplay 
+          muted 
+          loop 
+          playsinline
+        ></video>
+      </div>
+      
+    </div>
+  </section>
+  
+  <!-- Next White Section Example -->
+  <section class="white-section">
+
+  </section>
+
+
+
+
+  <section class="news-section">
+    <div class="news-container">
+      <!-- Badge & Title -->
+      <span class="news-badge" data-aos="fade-down" data-aos-duration="800">Blog &amp; News</span>
+      <h2 class="news-title"  data-aos="fade-down" data-aos-duration="900" >Latest Updates</h2>
+  
+      <!-- News Grid -->
+      <div class="news-grid">
+        <!-- Card 1 -->
+        <div class="news-card"  data-aos="fade-up" data-aos-delay="100">
+          <div class="news-image">
+            <img 
+              src="../../static/images/tql.jpg" 
+              alt="Twerk Queen Competition" loading="lazy"
+            />
+          </div>
+          <h3 class="news-heading">Win N10 Million at Club Vogue!</h3>
+          <p class="news-description">
+            TWERK QUEEN LAGOS!!! Every last Thursday, 9 top twerkers clash 
+            for the grand prize. Get on stage at 12am, party till dawn, and 
+            stand a chance to walk away with <strong>N10Million in cash</strong> 
+            on the spot + a Trophy!
+          </p>
+          <div class="news-footer">
+            <a href="#" class="read-more">Learn More &rarr;</a>
+            <span class="news-date">Next Finale: July 27, 2025</span>
+          </div>
+        </div>
+  
+        <!-- Card 2 -->
+        <div class="news-card"  data-aos="fade-up" data-aos-delay="100">
+          <div class="news-image">
+            <img 
+              src="../../static/images/vogue.jpg"
+              alt="Submit Twerk Video" loading="lazy"
+            />
+          </div>
+          <h3 class="news-heading">Submit Your 1-Minute Twerk Video</h3>
+          <p class="news-description">
+            Twerkers, send a well-lit 1-minute twerking clip to 
+            <strong>info.vhl@gmail.com</strong> now! Live fans and judges at 
+            <em>Club Vogue</em> will decide who gets into our monthly Grand 
+            Finale and a shot at <strong>N10Million</strong> raw cash!
+          </p>
+          <div class="news-footer">
+            <a href="#" class="read-more">Register &rarr;</a>
+            <span class="news-date">Deadline: July 25, 2025</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  
+
+
+  <script src="script.js"></script>
+
+  <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        offset: 120,
+        duration: 600,
+        once: true,
+      });
+    });
+  // OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("mainNav");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+  
+  // RESPONSIVE TOGGLE FOR HAMBURGER MENU
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+  
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("open");
+    navMenu.classList.toggle("active");
+  });
+
+  
+window.addEventListener("load", () => {
+    // Keep loader visible for 3 seconds after page load completes
+    setTimeout(() => {
+      document.getElementById("pageLoader").style.display = "none";
+    }, 3000);
+  });
+
+
+    // Simple JS for accordion toggle
+    function toggleAccordion(header) {
+      const parentItem = header.parentElement;
+      const body = parentItem.querySelector('.accordion-body');
+      const icon = parentItem.querySelector('.accordion-icon');
+  
+      // Expand/Collapse logic
+      if (parentItem.classList.contains('active')) {
+        parentItem.classList.remove('active');
+        body.style.maxHeight = 0;
+        icon.textContent = "+";
+      } else {
+        // close other open items if you want only one at a time
+        document.querySelectorAll('.accordion-item.active').forEach(item => {
+          item.classList.remove('active');
+          item.querySelector('.accordion-body').style.maxHeight = 0;
+          item.querySelector('.accordion-icon').textContent = "+";
+        });
+  
+        // open this one
+        parentItem.classList.add('active');
+        body.style.maxHeight = body.scrollHeight + "px";
+        icon.textContent = "–";
+      }
+    }
+  
+    // Initialize each accordion body at 0 height
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.accordion-body').forEach(body => {
+        body.style.maxHeight = 0;
+      });
+    });
+
+
+
+
+
+  // Simple JS for counting up from 0 to data-target
+  document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll(".number");
+    const speed = 100; // Adjust for faster/slower counting
+  
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute("data-target");
+        let current = +counter.innerText;
+        
+        // Adjust increment speed based on target
+        const increment = target / speed;
+  
+        if (current < target) {
+          counter.innerText = Math.ceil(current + increment);
+          setTimeout(updateCount, 40);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  });
+
+  const testimonials = [
+    {
+      text: "“Twerk Queen Lagos gave me the confidence to jump on stage and twerk like there's no tomorrow! My fanbase exploded overnight—thank you, TQL!”",
+      author: "—Nina Akoma",
+      image: "twerkqueen/tweekqueen2.jpeg"
+    },
+    {
+      text: "“From shy dancer to a star performer—Twerk Queen Lagos is the ultimate stage for unleashing your inner twerk!”",
+      author: "—Kesha Braxton",
+      image: "twerkqueen/twerkqueen.jpeg"
+    },
+    {
+      text: "“One night changed everything—my socials blew up the moment I stepped on that stage. I’m still riding the hype!”",
+      author: "—Leslie Alexander",
+      image: "twerkqueen/twerkqueen7.jpeg"
+    },
+    {
+      text: "“I joined on a whim, left as a champion. Twerk Queen Lagos is not just an event—it's a life-altering experience!”",
+      author: "—Mariana Lopez",
+      image: "2150368018.jpg"
+    }
+  ];
+
+  let currentIndex = 0;
+  const testimonialImage   = document.getElementById("testimonialImage");
+  const testimonialQuote   = document.getElementById("testimonialQuote");
+  const testimonialAuthor  = document.getElementById("testimonialAuthor");
+  const testimonialContent = document.getElementById("testimonialContent");
+  const testimonialImageWrapper = document.getElementById("testimonialImageWrapper");
+
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function displayTestimonial(index) {
+    // Fade out
+    testimonialContent.classList.add("fade-out");
+    testimonialImageWrapper.classList.add("fade-out");
+
+    setTimeout(() => {
+      // Update content once faded out
+      testimonialQuote.textContent  = testimonials[index].text;
+      testimonialAuthor.textContent = testimonials[index].author;
+      testimonialImage.src          = testimonials[index].image;
+
+      // Fade in
+      testimonialContent.classList.remove("fade-out");
+      testimonialContent.classList.add("fade-in");
+
+      testimonialImageWrapper.classList.remove("fade-out");
+      testimonialImageWrapper.classList.add("fade-in");
+
+      // Remove fade-in class after transition
+      setTimeout(() => {
+        testimonialContent.classList.remove("fade-in");
+        testimonialImageWrapper.classList.remove("fade-in");
+      }, 500);
+
+    }, 500); // match fade-out duration
+  }
+
+  // Initial Load
+  displayTestimonial(currentIndex);
+
+  // Next/Prev Functions
+  function showNext() {
+    currentIndex = (currentIndex + 1) % testimonials.length;
+    displayTestimonial(currentIndex);
+  }
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+    displayTestimonial(currentIndex);
+  }
+
+  // Button listeners
+  nextBtn.addEventListener("click", showNext);
+  prevBtn.addEventListener("click", showPrev);
+
+  // Auto-rotate every 4 seconds
+  const autoRotate = setInterval(() => {
+    showNext();
+  }, 4000);
+
+
+
+
+  const scrollUpBtn = document.getElementById("scroll-up");
+
+  // Show/Hide button on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      // User has scrolled down > 100px
+      scrollUpBtn.classList.add("_show-scroll");
+    } else {
+      // Near the top
+      scrollUpBtn.classList.remove("_show-scroll");
+    }
+  });
+
+  // Smooth scroll to top when button is clicked
+  scrollUpBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // Prevent default anchor jump
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  </script>
+
+</body>
+</html>
+
+
+
+  {%endblock content%}

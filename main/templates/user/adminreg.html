@@ -1,0 +1,214 @@
+{%extends 'user/generallayout.html'%}
+
+{%block customcss%}
+
+<link rel="stylesheet" href="../../static/css/registration.css">
+{%endblock customcss%}
+
+  {%block content%}
+  
+  
+
+
+
+  <section class="registration-section" id="register">
+    <div class="background">
+      <!-- Fallback background image if video doesn't load -->
+      <div class="bg-image"></div>
+
+      <!-- Blurred Video -->
+      <video autoplay muted loop id="background-video">
+        <source src="../../static/animation/RENDER1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="content-container">
+
+      <!-- Left Side Content (Center Vertically) -->
+      <div 
+        class="content-text" 
+        data-aos="fade-up" 
+        data-aos-duration="800"
+      >
+        <h1>Welcome to <span class=twerk>TWERK QUEEN LAGOS!</span> ADMIN SECTION</h1>
+
+
+      </div>
+
+      <!-- Registration Form (Right Side) -->
+      <div 
+        class="form-container glass-morph" 
+        data-aos="fade-up" 
+        data-aos-duration="800" 
+        data-aos-delay="200"
+      >
+
+      <div class="herologo glitch"  >
+        <!-- Main Logo -->
+        <img
+          src="../../static/logo/logo_invert.png"
+          alt="TQL Hero Logo"
+          class="hero_logo"
+        />
+      
+        <!-- Glitch Layers -->
+        <div class="glitch__layers">
+          <div class="glitch__layer"></div>
+          <div class="glitch__layer"></div>
+          <div class="glitch__layer"></div>
+        </div>
+      </div>
+  
+     <div style="text-align:center;">
+      <h2>Admin Registration</h2>
+     </div>
+
+     {% with messages = get_flashed_messages() %}
+     {% if messages %}
+         <div class="alert alert-info">
+             {% for message in messages %}
+                 <p>{{ message }}</p>
+             {% endfor %}
+         </div>
+     {% endif %}
+     {% endwith %}
+        <form id="registration-form" action="{{ url_for('admin_register') }}" method="POST" novalidate>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          
+          <div class="form-group">
+            <label for="last-name">Username</label>
+            <input type="text" id="username" name="username"  placeholder="Enter Username."  value="{{ request.form.username }}"  required />
+          </div>
+
+          {% if errors.get('username') %}
+          <div class="invalid-feedback">{{ errors['username'] }}</div>
+        {% endif %}
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email"  placeholder="Enter Your Email.." value="{{ request.form.email }}"   required />
+          </div>
+
+          {% if errors.get('email') %}
+          <div class="invalid-feedback">{{ errors['email'] }}</div>
+      {% endif %}
+
+
+
+          <div class="form-group">
+            <label for="state">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter Your Password" required />
+          </div>
+
+          {% if errors.get('password') %}
+          <div class="invalid-feedback">{{ errors['password'] }}</div>
+      {% endif %}
+
+          <div class="form-group">
+            <label for="state">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Your Password" required />
+          </div>
+
+          {% if errors.get('confirm_password') %}
+          <div class="invalid-feedback">{{ errors['confirm_password'] }}</div>
+      {% endif %}
+    
+          
+
+          <button type="submit" class="submit-btn">Register</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+
+    <!-- Back to Top Button -->
+    <a id="scroll-up" class="scroll-up" href="#">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            fill="#ffffff"
+            d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"
+          ></path>
+        </svg>
+      </a>
+
+
+
+  <script src="script.js"></script>
+
+  <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        offset: 120,
+        duration: 600,
+        once: true,
+      });
+    });
+
+
+  // OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("mainNav");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+  
+  // RESPONSIVE TOGGLE FOR HAMBURGER MENU
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+  
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("open");
+    navMenu.classList.toggle("active");
+  });
+
+
+
+
+
+
+
+window.addEventListener("load", () => {
+    // Keep loader visible for 3 seconds after page load completes
+    setTimeout(() => {
+      document.getElementById("pageLoader").style.display = "none";
+    }, 3000);
+  });
+
+
+
+
+  const scrollUpBtn = document.getElementById("scroll-up");
+
+  // Show/Hide button on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      // User has scrolled down > 100px
+      scrollUpBtn.classList.add("_show-scroll");
+    } else {
+      // Near the top
+      scrollUpBtn.classList.remove("_show-scroll");
+    }
+  });
+
+  // Smooth scroll to top when button is clicked
+  scrollUpBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // Prevent default anchor jump
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+</script>
+
+
+{%endblock content%}

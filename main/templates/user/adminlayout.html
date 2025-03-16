@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{pagename}}</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poiret+One&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <!-- Animate on Scroll (AOS) -->
+  <link
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../../static/css/admindash.css" />
+</head>
+<body>
+
+  <!-- Loader Overlay -->
+  <div class="loader-overlay">
+    <div class="frame">
+      <div class="center">
+        <div class="dot-1"></div>
+        <div class="dot-2"></div>
+        <div class="dot-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <aside class="dashboard-sidebar">
+    <div class="sidebar-header">
+      <img
+        src="../../static/logo/logo_invert.png"
+        alt="TQL Logo"
+        class="sidebar-logo"
+        data-light="../../static/logo/logo_invert.png"
+        data-dark="../../static/logo/TQL LOGO 2-01.png"
+      />
+      <h1 class="sidebar-title">Twerk Admin</h1>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="{{url_for('admin_dashboard')}}" class="active"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="{{url_for('admin_contestants')}}"><i class="fas fa-users"></i> Contestants Info</a></li>
+      <li><a href="{{url_for('admin_votes')}}"><i class="fas fa-vote-yea"></i> Contestant Votes</a></li>
+      <li><a href="{{url_for('admin_blog')}}"><i class="fas fa-blog"></i> Blog &amp; News</a></li>
+      <li><a href="{{url_for('admin_blog_new')}}"><i class="fas fa-blog"></i> Create Blog </a></li>
+
+      <li><a href="#"><i class="fas fa-address-book"></i> Contacts</a></li>
+      <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <p>© 2025 TwerkQueenLagos</p>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="dashboard-main">
+    <!-- Header -->
+    <header class="dashboard-header" data-aos="fade-down" data-aos-duration="800">
+      <div class="header-left">
+        <!-- Mobile & Desktop Menu Toggle -->
+        <div class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="welcome-message">
+          <h2>Hello, <span>{{ admin.username }}</span></h2>
+          <p>Here’s your daily update on Twerk Queen Lagos.</p>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!-- Dark Mode Toggle -->
+        <div class="theme-toggle">
+          <label for="darkModeToggle" class="darkModeToggleLabel">
+            <input type="checkbox" id="darkModeToggle" />
+            <span class="toggle-handle"></span>
+            <i class="fas fa-moon toggle-icon moon-icon"></i>
+            <i class="fas fa-sun toggle-icon sun-icon"></i>
+          </label>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search..." />
+        </div>
+
+        <!-- User Profile -->
+        <div class="user-profile" id="userProfileBtn">
+            <img src="{{('admin.avatar', '/static/avatars/av4.jpg') }}" alt="User" class="user-avatar" />
+            <span class="user-name">{{ admin.username }}</span>
+          <i class="fas fa-chevron-down"></i>
+
+          <!-- User Dropdown (click-based) -->
+          <div class="user-dropdown" id="userDropdownMenu">
+            <ul>
+              <li><a href=""><i class="fas fa-user"></i> My Profile</a></li>
+              <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+              <li><a href="{{ url_for('admin_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+
+    {%block content%}
+
+
+    {%endblock content%}
+    
+
+
+    
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Dashboard Scripts -->
+  <script>
+    AOS.init();
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.querySelector(".dashboard-sidebar");
+      const main = document.querySelector(".dashboard-main");
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const userProfileBtn = document.getElementById("userProfileBtn");
+      const userDropdownMenu = document.getElementById("userDropdownMenu");
+      const sidebarLogo = document.querySelector(".sidebar-logo");
+      const body = document.body;
+
+      // Toggle the sidebar for ALL screens
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        main.classList.toggle("active");
+      });
+
+      // Dark mode toggle
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener("change", () => {
+          body.classList.toggle("dark-theme");
+
+          // If you want to swap the logo:
+          if (darkModeToggle.checked) {
+            fadeImage(sidebarLogo, sidebarLogo.dataset.dark);
+          } else {
+            fadeImage(sidebarLogo, sidebarLogo.dataset.light);
+          }
+        });
+      }
+
+      // Fade out/in logo function
+      function fadeImage(imgElement, newSrc) {
+        imgElement.style.opacity = 0;
+        setTimeout(() => {
+          imgElement.src = newSrc;
+          imgElement.style.opacity = 1;
+        }, 300);
+      }
+
+      // User profile dropdown
+      userProfileBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        userDropdownMenu.classList.toggle("show");
+      });
+      document.addEventListener("click", (e) => {
+        if (!userProfileBtn.contains(e.target)) {
+          userDropdownMenu.classList.remove("show");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

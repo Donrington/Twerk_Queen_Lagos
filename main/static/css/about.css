@@ -1,0 +1,1473 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Example: primary font is Raleway, fallback is Varela, then sans-serif */
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  
+
+  
+
+/* NAVBAR (DESKTOP & GENERAL) */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: fixed; /* Sticky navbar */
+  width: 100%;
+  top: 0;
+  z-index: 999;
+
+  transition: background 0.3s ease, padding 0.3s ease;
+}
+
+/* LOGO */
+.logo {
+  width: 6.5rem;
+  height: auto;
+}
+.footer_logo {
+  width: 10rem;
+  height: auto;
+
+}
+  .footerlogo{
+
+    justify-content: center;
+    align-items:center;
+  }
+
+/* HAMBURGER (mobile icon) - hidden on desktop by default */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.bar {
+  width: 30px;
+  height: 3px;
+  background: #000;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* NAV MENU (DESKTOP) - elliptical glass morph style */
+.nav-menu {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius: 9999px;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease;
+}
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+.nav-menu ul li {
+  position: relative; /* for dropdown or line hover effect */
+}
+.nav-menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 5px 0;
+}
+/* Hover line effect */
+.nav-menu ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #b93a36;
+  left: 0;
+  bottom: -2px;
+  transition: width 0.3s ease;
+}
+.nav-menu ul li a:hover::after {
+  width: 70%;
+}
+.nav-menu ul li a:hover {
+  color:  #b93a36;
+}
+
+/* CTA BUTTON */
+.cta-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-left: 20px;
+  position: relative;
+  overflow: hidden; /* for ripple effect */
+}
+.cta-btn:hover {
+  background:  #b93a36;;
+  transform: scale(1.05);
+}
+/* Ripple on click */
+.cta-btn::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cta-btn:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+  transition: width 0.5s ease, height 0.5s ease, opacity 1s ease;
+  left: 50%;
+  top: 50%;
+}
+
+/* NAVBAR SCROLL EFFECT (optional) */
+.scrolled {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 40px;
+}
+
+/* DROPDOWN PARENT */
+.has-dropdown {
+  position: relative;
+}
+.has-dropdown .dropdown {
+  position: absolute;
+  top: calc(100% + 5px); /* slightly below the elliptical shape */
+  left: 0;
+  background: #fff; /* simple white sub-menu, matching reference image */
+  border-radius: 8px;
+  padding: 10px 0;
+  display: none; /* hidden by default */
+  min-width: 200px; /* ensure enough space for 4 items */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 9999; /* on top of the ellipse */
+}
+.has-dropdown .dropdown li {
+  list-style: none;
+}
+.has-dropdown .dropdown li a {
+  display: block;
+  padding: 10px 20px;
+  color: #000;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.has-dropdown .dropdown li a:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+/* Show sub-menu on hover (desktop) */
+nav ul li.has-dropdown:hover .dropdown {
+  display: block;
+}
+
+/* MEDIA QUERIES (Mobile) */
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transition: left 0.6s ease;
+    z-index: 1000;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .nav-menu.active {
+    left: 0;
+  }
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .nav-menu ul li a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .cta-btn {
+    display: none;
+  }
+
+  /* Sub-menu in mobile overlay */
+  .nav-menu ul li.has-dropdown .dropdown {
+    position: static;
+    background: none;
+    box-shadow: none;
+    display: none;
+    padding: 0;
+    min-width: auto;
+  }
+  .nav-menu ul li.has-dropdown:hover .dropdown {
+    display: block; /* basic hover approach on mobile */
+  }
+  .dropdown li a {
+    color: #fff !important;
+    padding-left: 40px; 
+    font-size: 18px;
+  }
+
+  .footer_logo {
+    width: 7rem;
+  
+  }
+
+  .logo {
+    width: 4.5rem;
+    height: auto;
+  }
+}
+
+/* HAMBURGER OPEN STATE */
+.hamburger.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Loader Container to center it on screen */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff; /* or any dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* On top of everything */
+}
+
+/* Loader Animation from Uiverse (modified) */
+.loader {
+  position: relative;
+}
+
+/* The text spans */
+.loader span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-size: 38px;
+  letter-spacing: 5px;
+  font-family: sans-serif;
+}
+
+/* First span: transparent fill, colored stroke */
+.loader span:nth-child(1) {
+  color: transparent;
+  /* A subtle stroke in #b93a36 */
+  -webkit-text-stroke: 0.4px #b93a36;
+}
+
+/* Second span: actual fill color + thicker stroke. 
+   Includes the clip-path animation. */
+.loader span:nth-child(2) {
+  color: #b93a36;
+  -webkit-text-stroke: 1px #b93a36;
+  animation: twerkClip 3s ease-in-out infinite;
+}
+
+/* Clip-path keyframes (originally "uiverse723" renamed) */
+@keyframes twerkClip {
+  0%, 100% {
+    clip-path: polygon(
+      0% 45%, 15% 44%, 32% 50%, 
+      54% 60%, 70% 61%, 84% 59%, 
+      100% 52%, 100% 100%, 0% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      0% 60%, 16% 65%, 34% 66%, 
+      51% 62%, 67% 50%, 84% 45%, 
+      100% 46%, 100% 100%, 0% 100%
+    );
+  }
+}
+
+
+/************************************************
+  ABOUT HERO SECTION
+************************************************/
+.about-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Fill the viewport height */
+    background: url('../../static/twerkqueen/twerkqueen6.jpeg') no-repeat center center / cover;
+    /* Alternatively, combine an overlay with the hero-overlay div */
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    /* Ensure text is left-aligned but with some padding on large screens */
+    padding: 0 60px; 
+  }
+  
+  /* Optional gradient overlay to darken or unify the background image */
+  .hero-overlay {
+    position: absolute;
+    inset: 0; /* fill entire section */
+    background: linear-gradient(
+      120deg,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.7)
+    );
+    z-index: 0; /* behind text */
+  }
+  
+  /* Hero Content: left side alignment */
+  .hero-content {
+    position: relative;
+    z-index: 1; /* above the overlay */
+    max-width: 600px; /* limit line length for better readability */
+    animation: fadeInLeft 1.5s ease-out forwards;
+    /* Start a bit off-screen for a subtle left entrance effect:
+       We'll define keyframes below. */
+    opacity: 0; 
+    transform: translateX(-50px);
+  }
+  
+  /* Mini Tagline (Montserrat) */
+  .mini-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    color: #fa583f;
+    animation: fadeUp 1.2s ease-out forwards;
+    opacity: 0; 
+    transform: translateY(30px);
+    animation-delay: 0.3s;
+  }
+  
+  /* Hero Title (Poiret One) */
+  .hero-title {
+    font-family: 'Poiret One', cursive;
+    font-size: 4rem; 
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 1.1;
+    color: #fff;
+    animation: fadeUp 1.2s ease-out forwards;
+    opacity: 0; 
+    transform: translateY(30px);
+    animation-delay: 0.6s;
+  }
+  
+  /* Hero Subtitle (Montserrat) */
+  .hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6; /* per requirement */
+    color: #f0f0f0;
+    max-width: 550px;
+    animation: fadeUp 1.2s ease-out forwards;
+    opacity: 0; 
+    transform: translateY(30px);
+    animation-delay: 0.9s;
+  }
+  
+  /* Down Arrow Link */
+  .down-arrow {
+    display: inline-block;
+    margin-top: 30px;
+    opacity: 0;       
+    animation: fadeUp 1.2s ease-out forwards, arrowBounce 1.5s infinite 2s ease-in-out;
+    /* arrowBounce starts after fadeUp finishes (2s). */
+    animation-delay: 1.2s; 
+    transition: transform 0.3s ease;
+    color: #fff;
+  }
+  
+  .down-arrow:hover {
+    transform: translateY(5px);
+  }
+  
+  /* ================ KEYFRAMES ================ */
+  
+  /* Fade-in from left (for .hero-content) */
+  @keyframes fadeInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Fade Up (for mini-tagline, hero-title, hero-subtitle, arrow) */
+  @keyframes fadeUp {
+    0% {
+      opacity: 0; 
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1; 
+      transform: translateY(0);
+    }
+  }
+  
+  /* Bouncing arrow animation after fadeUp completes */
+  @keyframes arrowBounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+  }
+  
+  /* ============= RESPONSIVE MEDIA QUERIES ============= */
+  @media (max-width: 992px) {
+    .hero-title {
+      font-size: 3rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.4rem;
+      letter-spacing: 3px;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+    .mini-tagline {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+  }
+  
+
+
+
+
+
+  /* CLASSES SECTION */
+.classes-section {
+    background-color: #fdfdfd; /* Light or neutral background */
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* For any AOS transitions */
+  }
+  
+  /* Container */
+  .classes-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center; /* Center the heading and badge; 
+                           card texts can be center or left as desired */
+  }
+  
+  /* BADGE */
+  .classes-badge {
+    display: inline-block;
+    background: #ffe6e0;
+    color: #b93a36;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+  
+  /* TITLE */
+  .classes-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #222;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
+  
+  /* SUBTITLE */
+  .classes-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+  }
+  
+  /* GRID LAYOUT */
+  .classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    align-items: start;
+  }
+  
+  /* CARD STYLES */
+  .class-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Hover lift effect */
+  .class-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  
+  /* IMAGE WRAPPER */
+  .class-image {
+    width: 100%;
+    height: 250px; /* or adapt to your design preference */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .class-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  
+  /* Subtle zoom on hover */
+  .class-card:hover .class-image img {
+    transform: scale(1.05);
+  }
+  
+  /* CARD CONTENT */
+  .class-heading {
+    font-size: 1.4rem;
+    margin: 20px;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .class-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0 20px 20px 20px;
+    flex: 1; /* so the description can expand while link stays at bottom if you want */
+  }
+  
+  .class-link {
+    color: #b93a36;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0 20px 20px 20px;
+    position: relative;
+    transition: color 0.2s ease;
+    align-self: flex-start;
+  }
+  
+  .class-link:hover {
+    color: #8d2c28;
+  }
+  
+  /* RESPONSIVE MEDIA QUERIES */
+  @media (max-width: 768px) {
+    .classes-title {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    .classes-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+    .class-image {
+      height: 200px;
+    }
+  }
+  
+/* WHY US SECTION */
+.why-us-section {
+    background-color: #fff; /* or #fdfdfd for a subtle neutral tone */
+    padding: 60px 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .why-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    /* for smaller screens, we’ll stack them in media queries */
+  }
+  
+  /* Left Image Column */
+  .why-image {
+    flex: 1 1 50%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .why-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .why-image:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Right Content Column */
+  .why-content {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .why-badge {
+    display: inline-block;
+    background: #ffe6e0;
+    color: #b93a36; 
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    width:11rem;
+  }
+  
+  .why-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #222;
+    margin-bottom: 30px;
+    line-height: 1.2;
+  }
+  
+  /* ACCORDION STYLES */
+  .why-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Each item */
+  .accordion-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 16px 20px;
+    position: relative;
+  }
+  
+  .accordion-header:hover {
+    background: #f0f0f0;
+  }
+  
+  .accordion-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #b93a36;
+    margin: 0;
+  }
+  
+  .accordion-icon {
+    font-size: 1.4rem;
+    color: #b93a36;
+    transition: transform 0.3s ease;
+  }
+  
+  .accordion-body {
+    background: #fff;
+    overflow: hidden; 
+    transition: max-height 0.3s ease;
+    padding: 0 20px;
+  }
+  
+  /* Some spacing for the text inside the body */
+  .accordion-body p {
+    margin: 16px 0;
+    line-height: 1.6;
+    color: #444;
+  }
+  
+  /* When item is active, apply some styles if desired */
+  .accordion-item.active .accordion-header {
+    background: #fbfbfb;
+  }
+  .accordion-item.active .accordion-title {
+    color: #8d2c28; /* a slightly darker accent */
+  }
+  .accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 992px) {
+    .why-container {
+      flex-direction: column;
+    }
+    .why-image, .why-content {
+      flex: 1 1 100%;
+    }
+    .why-image {
+      margin-bottom: 30px;
+    }
+    .why-title {
+      font-size: 2.2rem;
+    }
+  }
+  
+
+
+/* ========== IMPACT SECTION STYLES ========== */
+.impact-section {
+    background: #000;       /* dark background for Twerk Queen Lagos vibe */
+    color: #fff;
+    min-height: 200px;      /* ensure a tall, spacious feel */
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .impact-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    /* Wrap to stack on smaller screens in media queries */
+  }
+  
+  /* Left: Badge + Text */
+  .impact-left {
+    flex: 1 1 50%;
+  }
+  
+  .impact-badge {
+    display: inline-block;
+    background: #ffe6e0;
+    color: #b93a36;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+  
+  .impact-intro {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 500px;
+  }
+  
+  /* Right: Stats Grid */
+  .impact-right {
+    flex: 1 1 50%;
+  }
+  
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 30px;
+  }
+  
+  .number-card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .number-card:hover {
+    transform: translateY(-4px);
+  }
+  .number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fa583f;
+    margin-bottom: 5px;
+  }
+  .number-label {
+    font-size: 1rem;
+    color: #ddd;
+  }
+  
+  /* ========== TESTIMONIALS SECTION STYLES ========== */
+  .testimonials-section {
+    background: #000; /* Dark background */
+    color: #fff;
+    padding: 60px 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Spacing between image and content */
+  }
+  
+  .testimonial-image {
+    flex: 1 1 50%;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .testimonial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .testimonial-image:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Right side content */
+  .testimonial-content {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .testimonial-badge {
+    display: inline-block;
+    background: #ffe6e0;
+    color: #b93a36;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    width:9rem;
+  }
+  
+  .testimonial-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .testimonial-quote {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-bottom: 20px;
+  }
+  
+  .testimonial-author {
+    font-size: 1rem;
+    color: #fa583f;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  
+  /* Navigation Arrows */
+  .testimonial-nav {
+    display: flex;
+    gap: 10px;
+  }
+  .nav-arrow {
+    background: none;
+    color: #fa583f;
+    border: 2px solid #fa583f;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .nav-arrow:hover {
+    background: #fa583f;
+    color: #000;
+  }
+  /* The .fade-out & .fade-in classes for smooth transitions */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  /* RESPONSIVE */
+  @media (max-width: 992px) {
+    .testimonials-container {
+      flex-direction: column;
+    }
+    .testimonial-image, .testimonial-content {
+      flex: 1 1 100%;
+    }
+    .testimonial-title {
+      font-size: 2rem;
+    }
+  }
+  
+  
+  /* ========== MEDIA QUERIES ========== */
+  @media (max-width: 992px) {
+    .impact-container, .testimonials-container {
+      flex-direction: column;
+    }
+    .impact-left, .impact-right, 
+    .testimonial-image, .testimonial-content {
+      flex: 1 1 100%;
+    }
+    .impact-intro {
+      margin-bottom: 30px;
+    }
+    .numbers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .number {
+      font-size: 2rem;
+    }
+
+    .testimonial-quote {
+      font-size: 1rem;
+    }
+  }
+  
+
+
+/* ========== NEW VIDEO SECTION ========== */
+.video-cut-section {
+    /* No specific background color, 
+       because we want partial overlap from black to white. */
+    position: relative;
+    z-index: 10; /* Above the black testimonial background, 
+                    but not necessarily above everything else. */
+    margin-bottom: -330px; 
+    /* Negative margin pulls the next white background up 
+       so that the video can "bridge" between black and white. 
+       Tweak as needed for your design. */
+  }
+  
+  /* Container for the bridging effect */
+  .video-cut-container {
+    position: relative;
+    /* Potential top padding if you want space above the video 
+       or to overlap more with the black background. */
+    padding-top: 60px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    /* Set min-height to visually "bridge" the backgrounds. */
+    min-height: 500px;
+  }
+  
+  /* Background Text in Poiret One, behind the video */
+  .video-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-family: 'Poiret One', cursive;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.07);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 1; /* behind the video or in front if you want - tweak as desired */
+  }
+  
+  /* Video Wrapper for max width and partial overlap effect */
+  .video-wrapper {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 2; 
+  }
+  
+  /* Gradient overlay on top of the video */
+  .video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top right, 
+      rgba(0, 0, 0, 0.3),
+      rgba(255, 255, 255, 0.0)
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Actual video styling */
+  .twerk-video {
+    display: block;
+    width: 100%;
+    height: auto; 
+    z-index: 0; /* behind overlay */
+    object-fit: cover; 
+    /* If you want a set height, you can do height: 500px for consistency */
+  }
+  
+  /* Next White Section - for demonstration */
+  .white-section {
+    background: #fff;
+    color: #000;
+    padding: 60px 20px;
+    position: relative;
+    min-height: 400px;
+    z-index: 1;
+  }
+  
+  /* RESPONSIVE TWEAKS */
+  @media (max-width: 992px) {
+    .video-bg-text {
+      font-size: 5rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .video-bg-text {
+      font-size: 3rem;
+    }
+    .video-cut-container {
+      padding-top: 30px;
+    }
+    .video-wrapper {
+      border-radius: 8px;
+    }
+  }
+
+
+  
+
+/* NEWS SECTION WRAPPER */
+.news-section {
+    background: #fdfdfd; /* Light background */
+    padding: 60px 20px;
+  }
+  
+  /* CONTAINER */
+  .news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left; /* Align left, similar to the reference */
+  }
+  
+  /* BADGE */
+  .news-badge {
+    display: inline-block;
+    background: #ffe6e0;
+    color: #d9534f;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+  
+  /* TITLE */
+  .news-title {
+    font-size: 3rem; 
+    font-weight: 900;
+    color: #222;
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+  
+  /* GRID */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+  }
+  
+  /* CARD */
+  .news-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  /* Hover lift effect */
+  .news-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+  
+  /* IMAGE WRAPPER */
+  .news-image {
+    width: 100%;
+    height: 250px; 
+    overflow: hidden;
+  }
+  
+  .news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  
+  /* Zoom on hover */
+  .news-card:hover .news-image img {
+    transform: scale(1.05);
+  }
+  
+  /* CARD CONTENT */
+  .news-heading {
+    font-size: 1.4rem;
+    margin: 20px;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .news-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 20px 20px 20px;
+    flex: 1;
+  }
+  
+  /* CARD FOOTER */
+  .news-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 20px 20px;
+  }
+  
+  /* READ MORE LINK */
+  .read-more {
+    color: #d9534f;
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+  .read-more:hover {
+    color: #b93a36;
+  }
+  
+  /* DATE */
+  .news-date {
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Grayish color */
+  }
+  
+  /* RESPONSIVE MEDIA QUERY */
+  @media screen and (max-width: 768px) {
+    .news-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .news-image {
+      height: 200px;
+    }
+  }
+  
+  
+
+
+  
+
+/* FOOTER SECTION */
+.footer-section {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 30px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    position: relative;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  /* Left Side: Text */
+  .footer-left {
+    flex: 1 1 50%;
+    margin-right: 30px;
+  }
+  
+  .footer-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    color: #fa583f; /* Accent color */
+  }
+  
+  .footer-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #ddd;
+  }
+  
+  .footer-email {
+    font-size: 1.2rem;
+    color: #fa583f;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-email:hover {
+    color: #fff;
+  }
+  
+  /* Right Side: Location & Social Links */
+  .footer-right {
+    flex: 1 1 50%;
+  }
+  
+  .footer-studio {
+    margin-bottom: 20px;
+  }
+  
+  .footer-location-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fa583f;
+  }
+  
+  .footer-location {
+    font-size: 1rem;
+    color: #ddd;
+  }
+  
+  .footer-social {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .social-icon {
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 600;
+  }
+  
+  .social-icon:hover {
+    color: #fa583f;
+  }
+  
+  /* Footer Navigation */
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    
+  }
+  
+  .footer-nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-nav-link:hover {
+    color: #fa583f;
+  }
+  
+  /* Footer Copyright */
+  .footer-copyright {
+    font-size: 0.9rem;
+    color: #ddd;
+  }
+  
+  /* RESPONSIVE STYLES */
+  @media screen and (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footer-left, .footer-right {
+      flex: 1 1 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .footer-nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footer-nav-link {
+      margin: 10px 0;
+    }
+  
+    .hidden{
+      display: none;
+    }
+  
+    .footer-social {
+      /* If you'd like them stacked vertically, use a column layout:
+         flex-direction: column; 
+         align-items: center; 
+      */
+  
+      /* Or keep them in a row but with bigger spacing: */
+      gap: 25px; /* Increase gap on mobile for extra space */
+      /* You can also adjust justify-content or wrap them if needed */
+    }
+  
+  }
+  
+  
+
+/* From Uiverse.io by ArturCodeCraft */
+
+/* RESET STYLES */
+a {
+    text-decoration: none;
+  }
+  
+  /* MAIN STYLE */
+  .scroll-up {
+    position: fixed;        /* Ensure it's always visible on scroll */
+    right: 3rem;
+    bottom: -50%;          /* Initially hidden by positioning off-screen */
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: #fa583f; /* Updated color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: bottom 0.4s, transform 0.4s;
+  }
+  
+  /* Hover effect */
+  .scroll-up:hover {
+    transform: translateY(-0.25rem);
+  }
+  
+  /* Class to show the button */
+  ._show-scroll {
+    bottom: 3rem; /* Slide up into view */
+  }
+  
+  /* Media Query for smaller screens */
+  @media (max-width: 1199.98px) {
+    .scroll-up {
+      right: 1rem;
+    }
+  }

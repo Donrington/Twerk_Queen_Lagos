@@ -1,0 +1,83 @@
+{% extends 'user/adminlayout.html' %}
+
+{% block content %}
+<head>
+  <style>
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #fa583f;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: inline-block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input[type="text"],
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .form-group textarea {
+      height: 150px;
+    }
+    .btn-submit {
+      background: #fa583f;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    .btn-submit:hover {
+      background: #c94e35;
+    }
+  </style>
+</head>
+
+<div class="form-container">
+  <h2>Edit Blog Post</h2>
+  <form method="POST" action="{{ url_for('admin_blog_edit', post_id=post.id) }}">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" value="{{ post.title }}" required>
+    </div>
+    <div class="form-group">
+      <label for="slug">Slug</label>
+      <input type="text" name="slug" id="slug" value="{{ post.slug }}" required>
+    </div>
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author" value="{{ post.author }}">
+    </div>
+    <div class="form-group">
+      <label for="image_url">Image URL</label>
+      <input type="text" name="image_url" id="image_url" value="{{ post.image_url }}">
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea name="content" id="content" required>{{ post.content }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="is_published">Published?</label>
+      <input type="checkbox" name="is_published" id="is_published" value="1" 
+             {% if post.is_published %}checked{% endif %}>
+    </div>
+    <button type="submit" class="btn-submit">Update</button>
+  </form>
+</div>
+{% endblock content %}

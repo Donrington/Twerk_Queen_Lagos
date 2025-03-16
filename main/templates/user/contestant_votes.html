@@ -1,0 +1,74 @@
+{% extends 'user/adminlayout.html' %}
+
+{% block content %}
+
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+
+<section class="votes-section">
+    <div class="votes-container">
+        <h2 class="votes-title" data-aos="fade-up" data-aos-duration="900">
+            Contestant Votes
+        </h2>
+        <p class="votes-subtitle" data-aos="fade-up" data-aos-duration="1000">
+            View the current votes for each finalist and adjust them if needed.
+        </p>
+
+        <div class="vote-list" data-aos="fade-up" data-aos-duration="1100">
+            {% for contestant in contestant_votes %}
+            <div class="vote-item">
+                <h3>{{ contestant.name }}</h3>
+                <p>Votes: <span id="voteCount{{ contestant.id }}" class="vote-count">{{ contestant.vote_count }}</span></p>
+
+                <!-- Input field for votes -->
+                <input type="number" id="voteCountInput{{ contestant.id }}" value="0" style="width: 70px; margin-right: 10px;">
+
+                <!-- Button to update votes -->
+                <button class="vote-btn" onclick="updateVoteCount({{ contestant.id }})">
+                    Update Vote(s)
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    function updateVoteCount(contestantId) {
+        const inputElement = document.getElementById(`voteCountInput${contestantId}`);
+        let numberOfVotes = parseInt(inputElement.value, 10);
+    
+        if (isNaN(numberOfVotes) || numberOfVotes === 0) {
+            alert("Please enter a valid number (positive or negative).");
+            return;
+        }
+    
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+        fetch(`/update_vote_count/${contestantId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({ number_of_votes: numberOfVotes }) 
+        })
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+            if (status === 200 && body.success) {
+                alert("Vote count updated successfully!");
+                location.reload(); // Refresh the page after successful update
+            } else {
+                console.error('Error updating vote count:', body.error || 'Unknown error');
+                alert(body.error || "An error occurred");
+            }
+        })
+        .catch(error => {
+            console.error('Error updating vote count:', error);
+            alert("An error occurred while updating votes.");
+        });
+    }
+    </script>
+
+{% endblock %}

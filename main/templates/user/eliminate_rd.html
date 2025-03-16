@@ -1,0 +1,278 @@
+{%extends 'user/generallayout.html'%}
+
+{%block customcss%}
+
+<link rel="stylesheet" href="../../static/css/competition.css">
+{%endblock customcss%}
+
+  {%block content%}
+  
+  
+
+<!-- PARALLAX BLUR CIRCLES (for the entire page background) -->
+<div class="parallax-circle circle1"></div>
+<div class="parallax-circle circle2"></div>
+<div class="parallax-circle circle3"></div>
+<div class="parallax-circle circle4"></div>
+
+
+<!-- SECTION 1: Elimination Rounds -->
+<section class="auditions-section">
+    <div class="auditions-container">
+      <!-- Right: Image -->
+      <div class="auditions-image" data-aos="fade-left" data-aos-duration="900">
+        <img src="../../static/illustration/undraw12.png" alt="Twerk Elimination" loading="lazy"/>
+      </div>
+      
+      <!-- Left: Text Content -->
+      <div class="auditions-content" data-aos="fade-right" data-aos-duration="900">
+        <h2 class="auditions-title">Elimination Rounds</h2>
+        <p class="auditions-text">
+          Self-taught or seasoned pro, you'll battle it out to stay in the game! 
+          These fierce, knockout eliminations ensure only top contenders progress 
+          toward the monthly showdown. Are you ready to shake off the competition 
+          and claim your rightful spot?
+        </p>
+        <p class="auditions-cta-text">
+          Energy, adrenaline, and unstoppable booty-shaking—Elimination Rounds 
+          are where the real fight begins. Prove yourself or watch others 
+          snatch the limelight. The stage awaits—time to dominate!
+        </p>
+        <a href="#details" class="auditions-btn">Learn More</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- SECTION 2: Deeper Details / Why? -->
+  <section class="details-section" id="details">
+    <div class="details-container">
+      <div class="details-heading" data-aos="fade-up" data-aos-duration="1000">
+        <h2 class="details-title">Survive &amp; Thrive</h2>
+        <p class="details-subtitle">
+          Dive deeper into what makes our Elimination Rounds an edge-of-your-seat 
+          experience. It's more than just outlasting your rivals—it's about 
+          transforming raw talent into unstoppable performance, while 
+          electrifying the crowd every step of the way.
+        </p>
+      </div>
+  
+      <!-- Bullet Points / Why is it best? -->
+      <div class="details-bullets" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <h3 class="why-best-title">Why Are These Eliminations So Intense?</h3>
+        <ul class="why-best-list">
+          <li>Accelerates your improvement through back-to-back battles.</li>
+          <li>Helps you master pressure performance and crowd engagement.</li>
+          <li>Carves out your unique twerk signature among fierce competitors.</li>
+          <li>Gives ultimate bragging rights and epic social buzz if you conquer them.</li>
+          <li>Takes you one step closer to the final Twerk Queen Lagos stage!</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+
+
+  
+<!-- SECTION 3: Artistic Gallery -->
+<section class="gallery-section" id="gallery">
+    <div class="gallery-container">
+      <!-- Gallery Items -->
+      <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000">
+        <img src="../../static/twerkqueen/tweekqueen2.jpeg" alt="Gallery Image 1" class="gallery-image" loading="lazy" />
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <img src="../../static/twerkqueen/twerkqueen.jpeg" alt="Gallery Image 2" class="gallery-image" loading="lazy" />
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+        <img src="../../static/twerkqueen/twerkqueen4.jpeg" alt="Gallery Image 3" class="gallery-image" loading="lazy"/>
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+        <img src="../../static/twerkqueen/twerkqueen5.jpeg" alt="Gallery Image 4" class="gallery-image" loading="lazy" />
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+        <img src="../../static/twerkqueen/twerkqueen6.jpeg" alt="Gallery Image 5" class="gallery-image" loading="lazy"/>
+      </div>
+    </div>
+  
+    <!-- Full-screen Image Modal -->
+    <div class="image-modal" id="imageModal">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <img class="modal-image" id="modalImage" />
+    </div>
+  </section>
+  
+  
+  <section class="page-nav-section">
+    <div class="page-nav-container">
+      
+      <!-- Left side: Arrow + Label -->
+      <div class="nav-left">
+        <a href="{{url_for('weeklyaudition')}}" class="nav-prev " >
+          <span class="arrow-left" >&#8592;</span>
+          <span class="nav-label">Weekly Audition</span>
+        </a>
+      </div>
+  
+      <!-- Center: Grid Icon -->
+      <div class="nav-center">
+        <button class="grid-btn">
+          <!-- 
+            Optionally use an inline SVG or a background icon. 
+            This example uses 4 squares to mimic a "grid" icon.
+          -->
+          <span class="grid-icon">
+            <span class="square"></span>
+            <span class="square"></span>
+            <span class="square"></span>
+            <span class="square"></span>
+          </span>
+        </button>
+      </div>
+  
+      <!-- Right side: Label + Arrow -->
+      <div class="nav-right">
+        <a href="{{url_for('wildcard')}}" class="nav-next">
+          <span class="nav-label">WildCard Battles</span>
+          <span class="arrow-right">&#8594;</span>
+        </a>
+      </div>
+  
+    </div>
+  </section>
+  
+    
+  
+    
+
+  
+  
+      <!-- Back to Top Button -->
+  <a id="scroll-up" class="scroll-up" href="#">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"></path>
+        <path
+          fill="#ffffff"
+          d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"
+        ></path>
+      </svg>
+    </a>
+  
+  
+  
+  
+  
+    <script src="script.js"></script>
+  
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    
+    
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        offset: 120,
+        duration: 600,
+        once: true,
+      });
+    });
+  
+  
+  
+    
+    // OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("mainNav");
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+    
+    // RESPONSIVE TOGGLE FOR HAMBURGER MENU
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+    
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      navMenu.classList.toggle("active");
+    });
+  
+    
+  window.addEventListener("load", () => {
+      // Keep loader visible for 3 seconds after page load completes
+      setTimeout(() => {
+        document.getElementById("pageLoader").style.display = "none";
+      }, 3000);
+    });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // Select all gallery items
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const imageModal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const closeModal = document.getElementById('closeModal');
+  
+  // Loop through each gallery item and add event listeners for opening the modal
+  galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Get the image source and set it to the modal image
+      const imageSrc = item.querySelector('.gallery-image').src;
+      modalImage.src = imageSrc;
+      
+      // Show the modal
+      imageModal.style.display = 'flex';
+    });
+  });
+  
+  // Close the modal when the close button is clicked
+  closeModal.addEventListener('click', () => {
+    imageModal.style.display = 'none';
+  });
+  
+  // Close the modal when clicking outside the image
+  window.addEventListener('click', (e) => {
+    if (e.target === imageModal) {
+      imageModal.style.display = 'none';
+    }
+  });
+  
+  
+    
+  
+    const scrollUpBtn = document.getElementById("scroll-up");
+  
+    // Show/Hide button on scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        // User has scrolled down > 100px
+        scrollUpBtn.classList.add("_show-scroll");
+      } else {
+        // Near the top
+        scrollUpBtn.classList.remove("_show-scroll");
+      }
+    });
+  
+    // Smooth scroll to top when button is clicked
+    scrollUpBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Prevent default anchor jump
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  
+  
+  
+    </script>
+
+
+{%endblock content%}

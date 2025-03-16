@@ -1,0 +1,217 @@
+{% extends 'user/bloglayout.html' %}
+{%block customcss%}
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+<link rel="stylesheet" href="../../static/css/blog.css">
+{%endblock customcss%}
+
+{% block content %}
+
+
+
+
+<head>
+
+    <style>
+  
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffffea;
+        }
+        .blog-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #d63384;
+        }
+        .post-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .post-card:hover {
+            transform: translateY(-10px);
+        }
+        .post-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 20px;
+        }
+        .post-title {
+            font-size: 24px;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+        .post-meta {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .post-excerpt {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: #d63384;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .read-more:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <section class="about-hero">
+        <div class="hero-overlay"></div> <!-- Optional gradient overlay -->
+      
+        <div class="hero-content">
+          <!-- Mini Tagline in Montserrat -->
+          <p class="mini-tagline">Welcome to the Twerk Queen Lagos Blog</p>
+          
+          <!-- Hero Title in Poiret One -->
+          <h1 class="hero-title">Latest Moves & News</h1>
+          
+          <!-- Hero Subtitle in Montserrat -->
+          <p class="hero-subtitle">
+            Dive into the vibrant world of Twerk Queen Lagos! From exclusive tips 
+            and behind-the-scenes scoops to uplifting stories and event highlights, 
+            our blog unites dance enthusiasts to celebrate creativity, empowerment, 
+            and self-expression every single day.
+          </p>
+          
+          
+          <!-- Down Arrow Link -->
+          <a href="#countdown" class="down-arrow">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </a>
+        </div>
+      </section>
+ 
+
+
+
+    
+    <section class="news-section">
+        <div class="news-container">
+          <!-- Badge & Title -->
+          <span class="news-badge" data-aos="fade-down" data-aos-duration="800">Blog &amp; News</span>
+          <h2 class="news-title"  data-aos="fade-down" data-aos-duration="900" >Latest Updates</h2>
+      
+          <!-- News Grid -->
+          <div class="news-grid">
+            <!-- Card 1 -->
+            {% for post in posts %}
+            <div class="news-card"  data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+              <div class="news-image">
+            
+                {% if post.image_url %}
+                <img src="{{ post.image_url }}" alt="{{ post.title }}" class="post-image">
+                {% endif %}
+              </div>
+              <h3 class="news-heading">{{ post.title }}</h3>
+       
+              <p class="news-description">
+                {{ post.content[:200] }}...
+              </p>
+              <div class="news-footer">
+                <a href="{{ url_for('post_detail', slug=post.slug) }}" class="read-more">Read More &rarr;</a>
+                <span class="news-date">By {{ post.author }} | {{ post.created_on.strftime('%B %d, %Y') }}</span>
+              </div>
+            
+            </div>
+            {% endfor %}
+      
+            <!-- Card 2 -->
+            <div class="news-card"  data-aos="fade-up" data-aos-delay="100">
+              <div class="news-image">
+                <img 
+                  src="../../static/images/vogue.jpg"
+                  alt="Submit Twerk Video" loading="lazy"
+                />
+              </div>
+              <h3 class="news-heading">Submit Your 1-Minute Twerk Video</h3>
+              <p class="news-description">
+                Twerkers, send a well-lit 1-minute twerking clip to 
+                <strong>info.vhl@gmail.com</strong> now! Live fans and judges at 
+                <em>Club Vogue</em> will decide who gets into our monthly Grand 
+                Finale and a shot at <strong>N10Million</strong> raw cash!
+              </p>
+              <div class="news-footer">
+                <a href="#" class="read-more">Register &rarr;</a>
+                <span class="news-date">Deadline: July 25, 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+      <!-- Back to Top Button -->
+<a id="scroll-up" class="scroll-up" href="#">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path
+        fill="#ffffff"
+        d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"
+      ></path>
+    </svg>
+    </a>
+
+
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+  AOS.init({
+    offset: 120,
+    duration: 600,
+    once: true,
+  });
+});
+        window.addEventListener("load", () => {
+    // Keep loader visible for 3 seconds after page load completes
+    setTimeout(() => {
+      document.getElementById("pageLoader").style.display = "none";
+    }, 3000);
+  });
+
+
+
+
+  const scrollUpBtn = document.getElementById("scroll-up");
+
+  // Show/Hide button on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      // User has scrolled down > 100px
+      scrollUpBtn.classList.add("_show-scroll");
+    } else {
+      // Near the top
+      scrollUpBtn.classList.remove("_show-scroll");
+    }
+  });
+
+  // Smooth scroll to top when button is clicked
+  scrollUpBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // Prevent default anchor jump
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  
+    </script>
+</body>
+{% endblock %}

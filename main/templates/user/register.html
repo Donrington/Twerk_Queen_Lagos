@@ -1,0 +1,215 @@
+{%extends 'user/generallayout.html'%}
+
+{%block customcss%}
+
+<link rel="stylesheet" href="../../static/css/registration.css">
+{%endblock customcss%}
+
+  {%block content%}
+  
+  
+
+
+
+  <section class="registration-section" id="register">
+    <div class="background">
+      <!-- Fallback background image if video doesn't load -->
+      <div class="bg-image"></div>
+
+      <!-- Blurred Video -->
+      <video autoplay muted loop id="background-video">
+        <source src="../../static/video/twerk10.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="content-container">
+
+      <!-- Left Side Content (Center Vertically) -->
+      <div 
+        class="content-text" 
+        data-aos="fade-up" 
+        data-aos-duration="800"
+      >
+        <h1>Welcome to <span class=twerk>TWERK QUEEN LAGOS!</span></h1>
+        <p>Fill in the details below to register and showcase your twerking skills.</p>
+        <!-- <p>Be sure your passport photo meets our guidelines: clear, well-lit, and under 2MB.</p> -->
+      </div>
+
+      <!-- Registration Form (Right Side) -->
+      <div 
+        class="form-container glass-morph" 
+        data-aos="fade-up" 
+        data-aos-duration="800" 
+        data-aos-delay="200"
+      >
+
+      <div class="herologo glitch"  >
+        <!-- Main Logo -->
+        <img
+          src="../../static/logo/logo_invert.png"
+          alt="TQL Hero Logo"
+          class="hero_logo"
+        />
+      
+        <!-- Glitch Layers -->
+        <div class="glitch__layers">
+          <div class="glitch__layer"></div>
+          <div class="glitch__layer"></div>
+          <div class="glitch__layer"></div>
+        </div>
+      </div>
+  
+     <div style="text-align:center;">
+      <h2>Contestant Registration</h2>
+     </div>
+     <form id="registration-form" method="POST" action="{{ url_for('register') }}" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          <div class="flash-messages">
+              {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+          </div>
+      {% endif %}
+      {% endwith %}
+  
+      <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" placeholder="Enter First Name.." required />
+      </div>
+  
+      <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name" placeholder="Enter Last Name.." required />
+      </div>
+  
+      <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter Your Email.." required />
+      </div>
+  
+      <div class="form-group">
+          <label for="state">State of Origin</label>
+          <input type="text" id="state" name="state" placeholder="Enter Your State.." required />
+      </div>
+  
+      <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" placeholder="Select Date of Birth" required />
+      </div>
+  
+      <div class="form-group">
+          <label for="image">Passport Photo</label>
+          <div class="file-upload-container">
+              <div class="file-upload">
+                  <input class="file-input" id="fileInput" type="file" name="image" accept="image/*" required />
+                  <label class="file-label" for="fileInput">
+                      <i class="upload-icon">📁</i>
+                      <p>Drag &amp; Drop your file here or click to upload</p>
+                  </label>
+              </div>
+          </div>
+          <small class="instruction-text">
+              Passport photo (max 2MB, JPG/PNG). Must be clear and well-lit.
+          </small>
+      </div>
+  
+      <button type="submit" class="submit-btn">Register</button>
+  </form>
+      </div>
+    </div>
+  </section>
+
+
+
+    <!-- Back to Top Button -->
+    <a id="scroll-up" class="scroll-up" href="#">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            fill="#ffffff"
+            d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"
+          ></path>
+        </svg>
+      </a>
+
+
+
+  <script src="script.js"></script>
+
+  <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        offset: 120,
+        duration: 600,
+        once: true,
+      });
+    });
+
+
+  // OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("mainNav");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+  
+  // RESPONSIVE TOGGLE FOR HAMBURGER MENU
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+  
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("open");
+    navMenu.classList.toggle("active");
+  });
+
+
+
+
+
+
+window.addEventListener("load", () => {
+    // Keep loader visible for 3 seconds after page load completes
+    setTimeout(() => {
+      document.getElementById("pageLoader").style.display = "none";
+    }, 3000);
+  });
+
+
+
+
+  const scrollUpBtn = document.getElementById("scroll-up");
+
+  // Show/Hide button on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      // User has scrolled down > 100px
+      scrollUpBtn.classList.add("_show-scroll");
+    } else {
+      // Near the top
+      scrollUpBtn.classList.remove("_show-scroll");
+    }
+  });
+
+  // Smooth scroll to top when button is clicked
+  scrollUpBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // Prevent default anchor jump
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+</script>
+
+
+{%endblock content%}

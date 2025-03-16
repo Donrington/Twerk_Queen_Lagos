@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{pagname}}</title>
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <link rel="stylesheet" href="../../static/css/styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+
+   <nav id="mainNav">
+    <div ><a href="{{url_for('index')}}"><img src="../../static/logo/TWERK QUEEN LAGOS-02-logo-red.png" alt="logo" class="logo"></a></div>
+  
+    <!-- Hamburger Icon for Mobile -->
+    <div class="hamburger" id="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  
+    <!-- Navigation Links in a Rounded Container (Glassmorphic) -->
+    <div class="nav-menu" id="navMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About</a></li>
+  
+        <!-- Competition with a DROPDOWN -->
+        <li class="has-dropdown">
+          <a href="#competition">Competition</a>
+          <ul class="dropdown">
+            <li><a href="weeklyaud.html">Weekly Audition</a></li>
+            <li><a href="eliminate_rd.html">Elimination Rounds</a></li>
+            <li><a href="wildcard.html">Wildcard Battles</a></li>
+            <li><a href="final.html">Final Showdown</a></li>
+          </ul>
+        </li>
+  
+        <li><a href="Blog.html">Blog</a></li>
+        <li><a href="contactus.html">Contact</a></li>
+        <li><a href="register">Register</a></li>
+      </ul>
+
+    </div>
+  
+    <!-- Call-to-Action Button -->
+    <a href="register.html" class="cta-btn" id="ctaBtn">Let's Twerk</a>
+  </nav>
+
+
+
+
+
+
+
+  <!-- Loader Container -->
+<!-- Page Loader (Place this near the top of your body so it appears immediately) -->
+<div id="pageLoader" class="page-loader">
+  <div class="loader">
+    <!-- Two identical spans for the clipping effect -->
+    <span>Twerk Queen Lagos</span>
+    <span>Twerk Queen Lagos</span>
+  </div>
+</div>

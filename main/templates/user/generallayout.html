@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{pagename}}</title>
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+{%block customcss%}
+{%endblock customcss%}
+</head>
+<body>
+    <!-- Navbar -->
+
+   <nav id="mainNav">
+    <div ><a href="{{url_for('index')}}"><img src="../../static/logo/TWERK QUEEN LAGOS-02-logo-red.png" alt="logo" class="logo"></a></div>
+  
+    <!-- Hamburger Icon for Mobile -->
+    <div class="hamburger" id="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  
+    <!-- Navigation Links in a Rounded Container (Glassmorphic) -->
+    <div class="nav-menu" id="navMenu">
+      <ul>
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="{{url_for('aboutus')}}">About</a></li>
+  
+        <!-- Competition with a DROPDOWN -->
+        <li class="has-dropdown">
+          <a href="#competition">Competition</a>
+          <ul class="dropdown">
+            <li><a href="{{url_for('weeklyaudition')}}">Weekly Audition</a></li>
+            <li><a href="{{url_for('eliminate')}}">Elimination Rounds</a></li>
+            <li><a href="{{url_for('wildcard')}}">Wildcard Battles</a></li>
+            <li><a href="{{url_for('finals')}}">Final Showdown</a></li>
+          </ul>
+        </li>
+  
+        <li><a href="{{url_for('blog')}}">Blog</a></li>
+        <li><a href="{{url_for('contact')}}">Contact</a></li>
+        <li><a href="{{url_for('register')}}">Register</a></li>
+      </ul>
+
+    </div>
+  
+    <!-- Call-to-Action Button -->
+    <a href="{{url_for('register')}}" class="cta-btn" id="ctaBtn">Let's Twerk</a>
+  </nav>
+
+
+
+
+
+
+
+  <!-- Loader Container -->
+<!-- Page Loader (Place this near the top of your body so it appears immediately) -->
+<div id="pageLoader" class="page-loader">
+  <div class="loader">
+    <!-- Two identical spans for the clipping effect -->
+    <span>Twerk Queen Lagos</span>
+    <span>Twerk Queen Lagos</span>
+  </div>
+</div>
+
+
+{%block banner%}
+
+
+{%endblock banner%}
+
+
+
+
+{%block content%}
+
+
+
+
+{%endblock content%}
+
+
+
+
+
+
+
+<div style="overflow: hidden;" >
+    <svg
+      preserveAspectRatio="none"
+      viewBox="0 0 1200 120"
+      xmlns="http://www.w3.org/2000/svg"
+      style="fill: #201f1f; width: 151%; height: 127px;"
+    >
+      <path
+      d="M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z"
+      opacity=".25"
+    />
+      <path
+        d="M0 0v15.81c13 21.11 27.64 41.05 47.69 56.24C99.41 111.27 165 111 224.58 91.58c31.15-10.15 60.09-26.07 89.67-39.8 40.92-19 84.73-46 130.83-49.67 36.26-2.85 70.9 9.42 98.6 31.56 31.77 25.39 62.32 62 103.63 73 40.44 10.79 81.35-6.69 119.13-24.28s75.16-39 116.92-43.05c59.73-5.85 113.28 22.88 168.9 38.84 30.2 8.66 59 6.17 87.09-7.5 22.43-10.89 48-26.93 60.65-49.24V0z"
+        opacity=".5"
+      />
+      <path d="M0 0v5.63C149.93 59 314.09 71.32 475.83 42.57c43-7.64 84.23-20.12 127.61-26.46 59-8.63 112.48 12.24 165.56 35.4C827.93 77.22 886 95.24 951.2 90c86.53-7 172.46-45.71 248.8-84.81V0z" />
+    </svg>
+  </div>
+  
+  <section class="footer-section">
+    <div class="footer-container">
+      <div class="footer-content">
+      
+        <!-- Left Side: Text Content -->
+        <div class="footer-left">
+          <div class="footerlogo">
+            <img src="../../static/logo/TQL LOGO 2-01.png" alt="logo" class="footer_logo">
+          </div>
+          <h2 class="footer-title">Let's Keep on Dancing</h2>
+          <p class="footer-subtitle">Join the Twerk Queen Lagos community and be part of the most dynamic dance event in the city!</p>
+          <a href="mailto:hello@twerkqueenlagos.com" class="footer-email">hello@twerkqueenlagos.com</a>
+        </div>
+  
+        <!-- Right Side: Contact Info and Social Media -->
+        <div class="footer-right">
+          <div class="footer-studio">
+            <p class="footer-location-title">Main Studio</p>
+            <p class="footer-location">Club Vogue, Lagos, Nigeria</p>
+          </div>
+  
+          <div class="footer-social">
+            <a href="https://www.instagram.com/twerkqueenlagos" target="_blank" class="social-icon instagram">Instagram</a>
+            <a href="https://twitter.com/twerkqueenlagos" target="_blank" class="social-icon twitter">Twitter</a>
+            <a href="https://www.facebook.com/twerkqueenlagos" target="_blank" class="social-icon facebook">Facebook</a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Footer Navigation -->
+      <div class="footer-nav hidden">
+        <a href="#home" class="footer-nav-link">Home</a>
+        <a href="#about" class="footer-nav-link">About Us</a>
+        <a href="#contact" class="footer-nav-link">Contact</a>
+        <a href="#privacy" class="footer-nav-link">Privacy</a>
+      </div>
+  
+      <!-- Footer Copyright -->
+      <div class="footer-copyright">
+        <p>© 2025 Twerk Queen Lagos. All Rights Reserved.</p>
+      </div>
+    </div>
+  </section>
+  <div style="overflow: hidden;" style="margin-bottom: -150px;">
+    <svg
+      preserveAspectRatio="none"
+      viewBox="0 0 1200 120"
+      xmlns="http://www.w3.org/2000/svg"
+      style="fill: #201f1f; width: 151%; height: 127px; transform: rotate(180deg);" 
+    >
+      <path
+      d="M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z"
+      opacity=".25"
+    />
+      <path
+        d="M0 0v15.81c13 21.11 27.64 41.05 47.69 56.24C99.41 111.27 165 111 224.58 91.58c31.15-10.15 60.09-26.07 89.67-39.8 40.92-19 84.73-46 130.83-49.67 36.26-2.85 70.9 9.42 98.6 31.56 31.77 25.39 62.32 62 103.63 73 40.44 10.79 81.35-6.69 119.13-24.28s75.16-39 116.92-43.05c59.73-5.85 113.28 22.88 168.9 38.84 30.2 8.66 59 6.17 87.09-7.5 22.43-10.89 48-26.93 60.65-49.24V0z"
+        opacity=".5"
+      />
+      <path d="M0 0v5.63C149.93 59 314.09 71.32 475.83 42.57c43-7.64 84.23-20.12 127.61-26.46 59-8.63 112.48 12.24 165.56 35.4C827.93 77.22 886 95.24 951.2 90c86.53-7 172.46-45.71 248.8-84.81V0z" />
+    </svg>
+  </div>
+
+
+  <!-- Back to Top Button -->
+<a id="scroll-up" class="scroll-up" href="#">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"></path>
+  <path
+    fill="#ffffff"
+    d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"
+  ></path>
+</svg>
+</a>
+  <!-- Scripts -->
+  <script src="script.js"></script>
+
+<script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  AOS.init({
+    offset: 120,
+    duration: 600,
+    once: true,
+  });
+});
+// OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+window.addEventListener("scroll", () => {
+const navbar = document.getElementById("mainNav");
+if (window.scrollY > 50) {
+  navbar.classList.add("scrolled");
+} else {
+  navbar.classList.remove("scrolled");
+}
+});
+
+// RESPONSIVE TOGGLE FOR HAMBURGER MENU
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger.addEventListener("click", () => {
+hamburger.classList.toggle("open");
+navMenu.classList.toggle("active");
+});
+
+// Example CTA behavior
+const ctaBtn = document.getElementById("ctaBtn");
+ctaBtn.addEventListener("click", () => {
+alert("Let’s Dance clicked!");
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const heroVideo = document.getElementById("heroVideo");
+  // When the video is ready to play, fade it in
+  heroVideo.addEventListener("canplay", () => {
+    heroVideo.classList.remove("hidden");
+    heroVideo.style.opacity = "2"; // triggers the CSS transition
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const arrowLink = document.querySelector('.down-arrow');
+  arrowLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('#countdown').scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+
+const marquee = document.getElementById("marquee");
+let scrollPos = window.pageYOffset;   // Tracks the last scroll position
+let marqueeOffset = 0;               // Tracks the current translateX offset
+let marqueeSpeed = 2;                // Speed when scrolling
+let marqueeBaseSpeed = 0.3;          // Base speed for continuous movement
+
+function updateMarqueePosition() {
+  marquee.style.transform = `translateX(${marqueeOffset}px)`;
+}
+
+// Move marquee on scroll:
+// - Scroll down => move marquee left
+// - Scroll up => move marquee right
+document.addEventListener("scroll", () => {
+  const currentPos = window.pageYOffset;
+  if (currentPos > scrollPos) {
+    marqueeOffset -= marqueeSpeed;
+  } else {
+    marqueeOffset += marqueeSpeed;
+  }
+  updateMarqueePosition();
+  scrollPos = currentPos;
+});
+
+// Continuous movement using requestAnimationFrame
+function continuousMove() {
+  // Always move marquee left by a small base speed
+  marqueeOffset -= marqueeBaseSpeed;
+  updateMarqueePosition();
+  requestAnimationFrame(continuousMove);
+}
+
+// Start the continuous movement
+continuousMove();
+
+
+
+
+
+// Example: Countdown to a specific date/time
+// e.g., Dec 31, 2025 23:59:59
+const eventDate = new Date("March 11, 2025 23:59:59").getTime();
+
+// Update the countdown every second
+const timer = setInterval(() => {
+const now = new Date().getTime();
+const distance = eventDate - now;
+
+// Calculate days, hours, minutes, seconds
+const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+const hours = Math.floor(
+  (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+);
+const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+// Update UI
+document.getElementById("days").textContent = days < 10 ? "0" + days : days;
+document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
+document.getElementById("minutes").textContent =
+  minutes < 10 ? "0" + minutes : minutes;
+document.getElementById("seconds").textContent =
+  seconds < 10 ? "0" + seconds : seconds;
+
+// If the countdown is finished, stop updating
+if (distance < 0) {
+  clearInterval(timer);
+  document.querySelector(".countdown-timer").innerHTML = "Event has Started!";
+}
+}, 1000);
+
+
+
+
+
+
+// Show instructions for text voting
+function showVoteInstructions(name) {
+  alert(`To vote for ${name}, text: \n\nTWERK ${name.toUpperCase()} to 55599\n\nSupport your Twerk Queen today!`);
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+// Data for each bar
+const data = {
+  "Jessica Cruz": 70,
+  "Nina Chank": 50,
+  "Nina Jey": 65,
+  "Maria Lopes": 45,
+  "Alina Smith": 80
+};
+
+// Determine the max value
+let maxValue = 0;
+for (const value of Object.values(data)) {
+  if (value > maxValue) {
+    maxValue = value;
+  }
+}
+
+maxValue = Math.ceil((maxValue / 10) * 1.1) * 10;
+
+// Generate bars based on data
+const barsContainer = document.querySelector(".bars");
+barsContainer.innerHTML = '';
+
+for (const [name, value] of Object.entries(data)) {
+  const percent = (value / maxValue) * 100;
+  const barHTML = `
+    <li>
+      <div data-height="${percent}" class="bar">
+        <div class="per">${value}</div>
+      </div>
+      <span>${name}</span>
+    </li>
+  `;
+  barsContainer.innerHTML += barHTML;
+}
+
+// Intersection Observer for animation when in view
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Animate the bars after the section comes into view
+      const bars = entry.target.querySelectorAll(".bars li .bar");
+      bars.forEach(function(bar) {
+        const height = bar.getAttribute("data-height");
+        bar.style.height = `${height}%`; // Apply the height animation
+      });
+      entry.target.classList.add('animate'); // Add class to trigger animation
+      observer.unobserve(entry.target); // Stop observing after animation
+    }
+  });
+}, { threshold: 0.5 }); // Trigger animation when 50% of the section is visible
+
+// Observe the histogram section
+const histogramSection = document.querySelector("#standings");
+observer.observe(histogramSection);
+});
+
+
+
+// Example testimonial data
+const testimonials = [
+{
+  quote: "“Twerk Queen Lagos turned my passion into a full-blown performance career. The energy, the crowd—unmatched!”",
+  author: "Nina Akoma",
+  image: "../../static/images/2150368018.jpg"
+},
+{
+  quote: "“I never thought I'd gain so many fans. Twerk Queen Lagos changed my life forever. My confidence soared!”",
+  author: "Chelsea John",
+  image: "../../static/images/35535.jpg"
+},
+{
+  quote: "“From shy dancer to a star performer—Twerk Queen Lagos is the ultimate stage for unleashing your inner twerk!”",
+  author: "Kesha Akoni",
+  image: "../../static/images/46497.jpg"
+}
+];
+
+// Keep track of current index
+let currentIndex = 0;
+
+// DOM elements
+const testimonialQuote = document.getElementById("testimonialQuote");
+const testimonialAuthor = document.getElementById("testimonialAuthor");
+const testimonialImage = document.getElementById("testimonialImage");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+// Load initial testimonial
+window.addEventListener("DOMContentLoaded", () => {
+showTestimonial(currentIndex);
+
+// Automatically move to next testimonial every 3 seconds
+setInterval(() => {
+  switchTestimonial(currentIndex + 1);
+}, 3000);
+});
+
+function showTestimonial(index) {
+const t = testimonials[index];
+testimonialQuote.textContent = t.quote;
+testimonialAuthor.textContent = t.author;
+testimonialImage.src = t.image;
+}
+
+// Fade-out + update + fade-in function
+function switchTestimonial(nextIndex) {
+testimonialQuote.classList.add("fade-out");
+testimonialAuthor.classList.add("fade-out");
+testimonialImage.classList.add("fade-out");
+
+setTimeout(() => {
+  // Handle wrap-around
+  currentIndex = nextIndex;
+  if (currentIndex < 0) {
+    currentIndex = testimonials.length - 1;
+  }
+  if (currentIndex >= testimonials.length) {
+    currentIndex = 0;
+  }
+  showTestimonial(currentIndex);
+
+  testimonialQuote.classList.remove("fade-out");
+  testimonialAuthor.classList.remove("fade-out");
+  testimonialImage.classList.remove("fade-out");
+}, 600);
+}
+
+// Event Listeners for manual navigation
+prevBtn.addEventListener("click", () => {
+switchTestimonial(currentIndex - 1);
+});
+
+nextBtn.addEventListener("click", () => {
+switchTestimonial(currentIndex + 1);
+});
+
+
+
+document.querySelectorAll('.faq-item').forEach(item => {
+item.addEventListener('click', () => {
+  // Toggle active state for showing/hiding the answer
+  item.classList.toggle('active');
+});
+});
+
+
+window.addEventListener("load", () => {
+  // Keep loader visible for 3 seconds after page load completes
+  setTimeout(() => {
+    document.getElementById("pageLoader").style.display = "none";
+  }, 3000);
+});
+
+
+
+
+const scrollUpBtn = document.getElementById("scroll-up");
+
+// Show/Hide button on scroll
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100) {
+    // User has scrolled down > 100px
+    scrollUpBtn.classList.add("_show-scroll");
+  } else {
+    // Near the top
+    scrollUpBtn.classList.remove("_show-scroll");
+  }
+});
+
+// Smooth scroll to top when button is clicked
+scrollUpBtn.addEventListener("click", (e) => {
+  e.preventDefault(); // Prevent default anchor jump
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+
+
+
+  </script>
+</body>
+</html>

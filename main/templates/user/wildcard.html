@@ -1,0 +1,277 @@
+{%extends 'user/generallayout.html'%}
+
+{%block customcss%}
+
+<link rel="stylesheet" href="../../static/css/competition.css">
+{%endblock customcss%}
+
+  {%block content%}
+  
+  
+<!-- PARALLAX BLUR CIRCLES (for the entire page background) -->
+<div class="parallax-circle circle1"></div>
+<div class="parallax-circle circle2"></div>
+<div class="parallax-circle circle3"></div>
+<div class="parallax-circle circle4"></div>
+
+<!-- SECTION 1: Wildcard Battles -->
+<section class="auditions-section">
+    <div class="auditions-container">
+      <!-- Right: Image -->
+      <div class="auditions-image" data-aos="fade-left" data-aos-duration="900">
+        <img src="../../static/illustration/undraw13.png" alt="Twerk Wildcard Battles" loading="lazy"/>
+      </div>
+      
+      <!-- Left: Text Content -->
+      <div class="auditions-content" data-aos="fade-right" data-aos-duration="900">
+        <h2 class="auditions-title">Wildcard Battles</h2>
+        <p class="auditions-text">
+          Not every journey starts with a flawless audition—sometimes, you need 
+          a second chance. Enter the Wildcard Battles, where unexpected talents 
+          unleash their fiercest moves for a shot at redemption. Missed your first 
+          chance? This is your golden opportunity to prove you’re worthy of the big stage!
+        </p>
+        <p class="auditions-cta-text">
+          High stakes, unexpected rivals, and the thrill of a comeback—are you 
+          prepared to grab that spotlight you nearly lost? Lace up, twerk up, 
+          and let the crowd decide your fate!
+        </p>
+        <a href="#details" class="auditions-btn">Learn More</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- SECTION 2: Deeper Details / Why? -->
+  <section class="details-section" id="details">
+    <div class="details-container">
+      
+      <div class="details-heading" data-aos="fade-up" data-aos-duration="1000">
+        <h2 class="details-title">Your Second Shot</h2>
+        <p class="details-subtitle">
+          Dive deeper into why Wildcard Battles bring an explosive twist 
+          to Twerk Queen Lagos. It’s not just a do-over—it’s a fierce test 
+          of resilience, creativity, and raw twerking prowess.
+        </p>
+      </div>
+  
+      <!-- Bullet Points / Why is it best? -->
+      <div class="details-bullets" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <h3 class="why-best-title">What Makes Wildcard Battles Unmissable?</h3>
+        <ul class="why-best-list">
+          <li>Provides an epic comeback path for overlooked or unlucky twerkers.</li>
+          <li>Fuels underdog stories that amp up audience excitement and social chatter.</li>
+          <li>Rewards dancers who never give up, even after a misstep or close call.</li>
+          <li>Pushes creativity to the edge—anything goes when you’re fighting for a second shot!</li>
+          <li>Seals your place among the month’s top contenders if you seize the moment.</li>
+        </ul>
+      </div>
+  
+    </div>
+  </section>
+  
+
+
+  
+<!-- SECTION 3: Artistic Gallery -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-container">
+    <!-- Gallery Items -->
+    <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000">
+      <img src="../../static/twerkqueen/tweekqueen2.jpeg" alt="Gallery Image 1" class="gallery-image" loading="lazy" />
+    </div>
+    <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+      <img src="../../static/twerkqueen/twerkqueen.jpeg" alt="Gallery Image 2" class="gallery-image" loading="lazy" />
+    </div>
+    <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+      <img src="../../static/twerkqueen/twerkqueen4.jpeg" alt="Gallery Image 3" class="gallery-image" loading="lazy"/>
+    </div>
+    <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+      <img src="../../static/twerkqueen/twerkqueen5.jpeg" alt="Gallery Image 4" class="gallery-image" loading="lazy" />
+    </div>
+    <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+      <img src="../../static/twerkqueen/twerkqueen6.jpeg" alt="Gallery Image 5" class="gallery-image" loading="lazy"/>
+    </div>
+  </div>
+
+  <!-- Full-screen Image Modal -->
+  <div class="image-modal" id="imageModal">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <img class="modal-image" id="modalImage" />
+  </div>
+</section>
+  
+  <section class="page-nav-section">
+    <div class="page-nav-container">
+      
+      <!-- Left side: Arrow + Label -->
+      <div class="nav-left">
+        <a href="{{url_for('eliminate')}}" class="nav-prev " >
+          <span class="arrow-left" >&#8592;</span>
+          <span class="nav-label">Elimination Rounds</span>
+        </a>
+      </div>
+  
+      <!-- Center: Grid Icon -->
+      <div class="nav-center">
+        <button class="grid-btn">
+          <!-- 
+            Optionally use an inline SVG or a background icon. 
+            This example uses 4 squares to mimic a "grid" icon.
+          -->
+          <span class="grid-icon">
+            <span class="square"></span>
+            <span class="square"></span>
+            <span class="square"></span>
+            <span class="square"></span>
+          </span>
+        </button>
+      </div>
+  
+      <!-- Right side: Label + Arrow -->
+      <div class="nav-right">
+        <a href="{{url_for('finals')}}" class="nav-next">
+          <span class="nav-label">final Showdown</span>
+          <span class="arrow-right">&#8594;</span>
+        </a>
+      </div>
+  
+    </div>
+  </section>
+  
+    
+  
+    
+
+  
+  
+      <!-- Back to Top Button -->
+  <a id="scroll-up" class="scroll-up" href="#">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"></path>
+        <path
+          fill="#ffffff"
+          d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"
+        ></path>
+      </svg>
+    </a>
+  
+  
+  
+  
+  
+    <script src="script.js"></script>
+  
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    
+    
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        offset: 120,
+        duration: 600,
+        once: true,
+      });
+    });
+  
+  
+  
+    
+    // OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("mainNav");
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+    
+    // RESPONSIVE TOGGLE FOR HAMBURGER MENU
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+    
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      navMenu.classList.toggle("active");
+    });
+  
+    
+  window.addEventListener("load", () => {
+      // Keep loader visible for 3 seconds after page load completes
+      setTimeout(() => {
+        document.getElementById("pageLoader").style.display = "none";
+      }, 3000);
+    });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // Select all gallery items
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const imageModal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const closeModal = document.getElementById('closeModal');
+  
+  // Loop through each gallery item and add event listeners for opening the modal
+  galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Get the image source and set it to the modal image
+      const imageSrc = item.querySelector('.gallery-image').src;
+      modalImage.src = imageSrc;
+      
+      // Show the modal
+      imageModal.style.display = 'flex';
+    });
+  });
+  
+  // Close the modal when the close button is clicked
+  closeModal.addEventListener('click', () => {
+    imageModal.style.display = 'none';
+  });
+  
+  // Close the modal when clicking outside the image
+  window.addEventListener('click', (e) => {
+    if (e.target === imageModal) {
+      imageModal.style.display = 'none';
+    }
+  });
+  
+  
+    
+  
+    const scrollUpBtn = document.getElementById("scroll-up");
+  
+    // Show/Hide button on scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        // User has scrolled down > 100px
+        scrollUpBtn.classList.add("_show-scroll");
+      } else {
+        // Near the top
+        scrollUpBtn.classList.remove("_show-scroll");
+      }
+    });
+  
+    // Smooth scroll to top when button is clicked
+    scrollUpBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Prevent default anchor jump
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  
+  
+  
+    </script>
+
+
+
+{%endblock content%}
