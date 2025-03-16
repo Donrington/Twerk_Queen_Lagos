@@ -386,6 +386,7 @@ def init_routes(app):
 
     @app.route('/admin/blog/delete/<int:post_id>', methods=['POST'])
     @admin_login_required
+    @csrf.exempt
     def admin_blog_delete(post_id):
         """Delete a blog post."""
         post = BlogPost.query.get_or_404(post_id)

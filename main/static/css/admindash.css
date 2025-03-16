@@ -55,43 +55,54 @@ body {
 }
 
 /******** Loader Overlay ********/
+
+/* Update Loader CSS */
 .loader-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.9);
   z-index: 9999;
-  display: none; /* Set to block if you want to show loader */
-}
-.loader-overlay .frame {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
+
+.loader-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Modern Loader Animation */
+@keyframes pulse {
+  0%, 100% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
 .loader-overlay .center {
   display: flex;
-  gap: 8px;
+  gap: 15px;
 }
+
 .loader-overlay .dot-1,
 .loader-overlay .dot-2,
 .loader-overlay .dot-3 {
-  width: 12px; 
-  height: 12px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--primary-color);
-  animation: loaderBounce 1.2s infinite;
+  animation: pulse 1.5s infinite ease-in-out;
 }
+
 .loader-overlay .dot-2 {
   animation-delay: 0.2s;
 }
+
 .loader-overlay .dot-3 {
   animation-delay: 0.4s;
 }
-@keyframes loaderBounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
-}
+
 
 /******** Sidebar ********/
 /* Hide by default on all screens. Shown when .active is toggled. */
@@ -526,6 +537,58 @@ body.dark-theme .stats-card {
 body.dark-theme .stats-card:hover {
   box-shadow: 0 8px 22px rgba(0,0,0,0.3);
 }
+
+
+/* Add this to your existing CSS */
+
+/* Active Link Handling */
+.dashboard-sidebar .sidebar-menu a.active {
+  background: rgba(250, 88, 63, 0.2) !important;
+  border-left: 4px solid var(--primary-color) !important;
+  transform: translateX(5px);
+}
+
+/* Mobile Responsive Sidebar */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    width: 280px;
+    left: -280px;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dashboard-sidebar.active {
+    left: 0;
+  }
+  
+  .dashboard-main {
+    margin-left: 0;
+  }
+  
+  .menu-toggle {
+    display: block !important;
+    z-index: 1001;
+  }
+  
+  /* Overlay for mobile */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+  
+  .dashboard-sidebar.active + .sidebar-overlay {
+    display: block;
+  }
+}
+
+
+
+
 
 /********** End **********/
 

@@ -181,6 +181,67 @@
         }
       });
     });
+
+    /* Add this JavaScript */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Active link handling
+  const currentPage = window.location.pathname;
+  const links = document.querySelectorAll('.sidebar-menu a');
+  
+  links.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+    }
+    
+    link.addEventListener('click', function(e) {
+      links.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Close sidebar on mobile after clicking link
+      if (window.innerWidth <= 768) {
+        document.querySelector('.dashboard-sidebar').classList.remove('active');
+        document.querySelector('.sidebar-overlay').style.display = 'none';
+      }
+    });
+  });
+
+  // Mobile sidebar toggle
+
+});
+
+
+// Activate Loader
+document.addEventListener('DOMContentLoaded', function() {
+  // Show loader on page transition
+  const loader = document.querySelector('.loader-overlay');
+  
+  // Hide loader when page finishes loading
+  setTimeout(() => {
+    loader.classList.add('hidden');
+  }, 1000); // Adjust timing as needed
+
+  // Show loader on link clicks
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      loader.classList.remove('hidden');
+    });
+  });
+
+  // Show loader on form submissions
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', () => {
+      loader.classList.remove('hidden');
+    });
+  });
+});
+
+// Add smooth page transitions
+window.addEventListener('beforeunload', function() {
+  document.querySelector('.loader-overlay').classList.remove('hidden');
+});
+
+
   </script>
 </body>
 </html>
