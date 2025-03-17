@@ -174,6 +174,7 @@
                   </defs>
                 </svg>
               </div>
+              <a href="{{url_for('register')}}">
               <p>
                 <span style="--i:0">R</span>
                 <span style="--i:1">e</span>
@@ -188,6 +189,7 @@
                 <span style="--i:10">o</span>
                 <span style="--i:11">w</span>
               </p>
+            </a>
             </div>
             <div class="state state--sent">
               <div class="icon">
@@ -271,8 +273,8 @@
     
           <!-- CTA Buttons -->
           <div class="empower-cta">
-            <a href="#" class="btn primary-btn">Join</a>
-            <a href="aboutus.html" class="btn outline-btn">Learn More &rarr;</a>
+            <a href="{{url_for('register')}}" class="btn primary-btn">Join</a>
+            <a href="{{url_for('aboutus')}}" class="btn outline-btn">Learn More &rarr;</a>
           </div>
         </div>
     
@@ -364,8 +366,8 @@
     
         <!-- CTA Buttons -->
         <div class="competition-cta">
-          <a href="aboutus.html" class="btn learn-more">Learn More</a>
-          <a href="#" class="btn sign-up">Sign Up &rarr;</a>
+          <a href="{{url_for('weeklyaudition')}}" class="btn learn-more">Learn More</a>
+          <a href="{{url_for('register')}}" class="btn sign-up">Sign Up &rarr;</a>
         </div>
       </div>
     </section>
@@ -465,7 +467,7 @@
           <div class="card-content">
             <h3>Compete for exciting cash prizes and prestigious awards!</h3>
             <p>Experience thrilling performances from the best dancers in the industry.</p>
-            <a href="aboutus.html" class="card-link">Learn More &rarr;</a>
+            <a href="{{url_for('finals')}}" class="card-link">Learn More &rarr;</a>
           </div>
         </div>
     
@@ -479,7 +481,7 @@
           <div class="card-content">
             <h3>Immerse yourself in our ultra-modern event setup & vibrant atmosphere!</h3>
             <p>Our competition features cutting-edge design and an unforgettable experience.</p>
-            <a href="#" class="card-link">Sign Up &rarr;</a>
+          <a href="{{url_for('register')}}" class="card-link">Sign Up &rarr;</a>
           </div>
         </div>
     
@@ -493,7 +495,7 @@
           <div class="card-content">
             <h3>Meet & connect with top dancers from around the country!</h3>
             <p>Join a community of passionate dancers and celebrate your love for twerking!</p>
-            <a href="#" class="card-link">Join &rarr;</a>
+            <a href="{{url_for('register')}}" class="card-link">Join &rarr;</a>
           </div>
         </div>
       </div>
@@ -547,8 +549,8 @@
             </div>
             <h3 class="news-heading">{{ post.title }}</h3>
      
-            <p class="news-description">
-              {{ post.content[:200] }}...
+            <p class="news-description" style="color:#201f1f">
+              {{ post.content[:200]  }}...
             </p>
             <div class="news-footer">
               <a href="{{ url_for('post_detail', slug=post.slug) }}" class="read-more">Read More &rarr;</a>

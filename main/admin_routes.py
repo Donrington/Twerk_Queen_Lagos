@@ -427,59 +427,82 @@ def init_routes(app):
     @admin_login_required
     def admin_settings():
         admin = Admin.query.get(session.get('id'))
-        
+
         if request.method == 'POST':
+            updated = False  # Track if any changes were made
+
+            # Handle username and email update
+            new_username = request.form.get('username')
+            new_email = request.form.get('email')
+
+            if new_username and new_username != admin.username:
+                if Admin.query.filter_by(username=new_username).first():
+                    flash('Username is already taken', 'error')
+                else:
+                    admin.username = new_username
+                    updated = True
+
+            if new_email and new_email != admin.email:
+                if Admin.query.filter_by(email=new_email).first():
+                    flash('Email is already in use', 'error')
+                else:
+                    admin.email = new_email
+                    updated = True
+
             # Handle avatar upload
             if 'avatar' in request.files:
                 avatar = request.files['avatar']
                 if avatar.filename != '':
                     if not allowed_file(avatar.filename):
                         flash('Invalid file type', 'error')
-                        return redirect(url_for('admin_settings'))
-                    
-                    filename = secure_filename(avatar.filename)
-                    upload_folder = os.path.join(app.config['ADMIN_PROFILE_PATH'], 'avatars')
-                    os.makedirs(upload_folder, exist_ok=True)
-                    avatar_path = os.path.join(upload_folder, filename)
-                    
-                    try:
-                        with Image.open(avatar) as img:
-                            img.thumbnail((300, 300))
-                            img.save(avatar_path)
-                            admin.avatar = f"uploads/admins/avatars/{filename}"
-                    except Exception as e:
-                        flash('Error processing image', 'error')
-                        return redirect(url_for('admin_settings'))
+                    else:
+                        filename = secure_filename(avatar.filename)
+                        upload_folder = os.path.join(app.config['ADMIN_PROFILE_PATH'], 'avatars')
+                        os.makedirs(upload_folder, exist_ok=True)
+                        avatar_path = os.path.join(upload_folder, filename)
+
+                        try:
+                            with Image.open(avatar) as img:
+                                img.thumbnail((300, 300))
+                                img.save(avatar_path)
+                                admin.avatar = f"uploads/admins/avatars/{filename}"
+                                updated = True
+                        except Exception as e:
+                            flash('Error processing image', 'error')
 
             # Handle password change
             current_password = request.form.get('current_password')
             new_password = request.form.get('new_password')
             confirm_password = request.form.get('confirm_password')
-            
+
             if new_password or confirm_password:
                 if not current_password:
-                    flash('Current password is required', 'error')
+                    flash('Current password is required to change your password', 'error')
                 elif new_password != confirm_password:
                     flash('New passwords do not match', 'error')
                 elif not admin.check_password(current_password):
                     flash('Current password is incorrect', 'error')
                 else:
                     admin.set_password(new_password)
+                    updated = True
                     flash('Password updated successfully', 'success')
 
-            db.session.commit()
-            flash('Settings updated successfully', 'success')
+            if updated:
+                db.session.commit()
+                flash('Settings updated successfully', 'success')
+            else:
+                flash('No changes made', 'info')
+
             return redirect(url_for('admin_settings'))
 
         return render_template('user/admin_settings.html', 
-                            pagename="Account Settings",  
-                            admin=admin)
-# Add this helper function for file validation
+                                pagename="Account Settings",  
+                                admin=admin)
+
     def allowed_file(filename):
         ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-        return '.' in filename and \
-            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+        return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+   
     @app.route('/update-dark-mode', methods=['POST'])
     @admin_login_required
     def update_dark_mode():

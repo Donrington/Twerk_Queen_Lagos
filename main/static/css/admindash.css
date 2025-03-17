@@ -417,6 +417,10 @@ body {
   display: grid;
     gap: 30px;
 }
+
+.stats-grid a{
+  text-decoration: none;
+}
 .stats-card {
   background: var(--card-bg);
   backdrop-filter: blur(20px);
@@ -1104,3 +1108,18 @@ input[type="number"]:focus {
     text-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--primary-color);
   }
 }
+
+/* Enhanced Alert Styling */
+.alert {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: var(--border-radius);
+  border-left: 4px solid transparent;
+}
+
+.alert-info {
+  background: rgba(250,88,63,0.1);
+  border-color: var(--primary-color);
+  color: var(--text-color);
+}
+

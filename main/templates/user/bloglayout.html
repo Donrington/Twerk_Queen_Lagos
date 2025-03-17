@@ -13,6 +13,189 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
+  <style>
+    /* Updated Loader Styles */
+    .page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .glitch-logo {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+    
+    .loader-logo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px #b93a36);
+    }
+    
+    /* Enhanced Glitch Effect */
+    .glitch__layer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url('../../static/logo/TQL LOGO 2-01.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      mix-blend-mode: multiply;
+      animation: glitch-anim-1 2s infinite linear alternate;
+    }
+    
+    .glitch__layer:nth-child(1) {
+      animation: glitch-anim-1 1.2s infinite linear alternate;
+      clip-path: polygon(0 43%, 100% 43%, 100% 45%, 0 45%);
+    }
+    
+    .glitch__layer:nth-child(2) {
+      animation: glitch-anim-2 1.5s infinite linear alternate;
+      clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%);
+      mix-blend-mode: color-burn;
+    }
+    
+    .glitch__layer:nth-child(3) {
+      animation: glitch-anim-flash 0.8s infinite linear;
+      opacity: 0.7;
+    }
+    
+    /* Animated Text */
+    .loader-text {
+      position: absolute;
+      bottom: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 2px;
+    }
+    
+    .loader-text span {
+      font-family: 'Poiret One', cursive;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #b93a36;
+      text-shadow: 0 0 10px rgba(185,58,54,0.4);
+      animation: letter-float 2s ease-in-out infinite;
+      animation-delay: calc(var(--i) * 0.1s);
+    }
+    
+    @keyframes letter-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    /* Enhanced Glitch Animations */
+    @keyframes glitch-anim-1 {
+      0% { transform: translate(-3px, -3px); opacity: 0.8; }
+      25% { transform: translate(3px, 3px); opacity: 0.6; }
+      50% { transform: translate(-2px, 2px); opacity: 0.9; }
+      75% { transform: translate(2px, -2px); opacity: 0.7; }
+      100% { transform: translate(0, 0); opacity: 1; }
+    }
+    
+    @keyframes glitch-anim-2 {
+      0% { transform: translate(3px, 3px); }
+      25% { transform: translate(-3px, -3px); }
+      50% { transform: translate(2px, -2px); }
+      75% { transform: translate(-2px, 2px); }
+      100% { transform: translate(0, 0); }
+    }
+    
+    @keyframes glitch-anim-flash {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+    
+    /* Chromatic Aberration Effect */
+    .glitch-logo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('../../static/logo/TQL LOGO 2-01.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      mix-blend-mode: exclusion;
+      animation: chromatic-aberration 1.5s infinite linear;
+      opacity: 0.5;
+    }
+    
+    @keyframes chromatic-aberration {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(3px, -3px); }
+      40% { transform: translate(-3px, 2px); }
+      60% { transform: translate(2px, -2px); }
+      80% { transform: translate(-2px, 3px); }
+      100% { transform: translate(0, 0); }
+    }
+    
+    @media (max-width: 1200px) {
+  .glitch-logo {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .loader-text span {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .glitch-logo {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .loader-text {
+    bottom: -20%;
+  }
+
+  .loader-text span {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glitch-logo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .loader-text {
+    bottom: -15%;
+  }
+
+  .loader-text span {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .glitch-logo {
+    width: 180px;
+    height: 180px;
+  }
+
+  .loader-text {
+    bottom: -10%;
+  }
+
+  .loader-text span {
+    font-size: 1rem;
+  }
+}
+    </style>
 {%block customcss%}
 {%endblock customcss%}
 </head>
@@ -63,16 +246,34 @@
 
 
 
-  <!-- Loader Container -->
-<!-- Page Loader (Place this near the top of your body so it appears immediately) -->
-<div id="pageLoader" class="page-loader">
-  <div class="loader">
-    <!-- Two identical spans for the clipping effect -->
-    <span>Twerk Queen Lagos</span>
-    <span>Twerk Queen Lagos</span>
+  <div id="pageLoader" class="page-loader glitch-loader">
+    <div class="glitch-logo">
+      <!-- Main Logo -->
+      <img src="../../static/logo/TQL LOGO 2-01.png" alt="TQL Loader Logo" class="loader-logo" />
+      
+      <!-- Glitch Layers -->
+      <div class="glitch__layers">
+        <div class="glitch__layer"></div>
+        <div class="glitch__layer"></div>
+        <div class="glitch__layer"></div>
+      </div>
+      
+      <!-- Animated Text Overlay -->
+      <div class="loader-text">
+        <span style="--i:1">T</span>
+        <span style="--i:2">W</span>
+        <span style="--i:3">E</span>
+        <span style="--i:4">R</span>
+        <span style="--i:5">K</span>
+        <span style="--i:6"></span>
+        <span style="--i:7">Q</span>
+        <span style="--i:8">U</span>
+        <span style="--i:9">E</span>
+        <span style="--i:10">E</span>
+        <span style="--i:11">N</span>
+      </div>
+    </div>
   </div>
-</div>
-
 
 {%block banner%}
 

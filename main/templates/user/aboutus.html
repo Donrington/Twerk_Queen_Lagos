@@ -327,6 +327,27 @@
   
       <!-- News Grid -->
       <div class="news-grid">
+
+        {% for post in posts %}
+        <div class="news-card"  data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+          <div class="news-image">
+        
+            {% if post.image_url %}
+            <img src="{{ post.image_url }}" alt="{{ post.title }}" class="post-image">
+            {% endif %}
+          </div>
+          <h3 class="news-heading">{{ post.title }}</h3>
+   
+          <p class="news-description" style="color:#201f1f">
+            {{ post.content[:200] }}...
+          </p>
+          <div class="news-footer">
+            <a href="{{ url_for('post_detail', slug=post.slug) }}" class="read-more">Read More &rarr;</a>
+            <span class="news-date">By {{ post.author }} | {{ post.created_on.strftime('%B %d, %Y') }}</span>
+          </div>
+        
+        </div>
+        {% endfor %}
         <!-- Card 1 -->
         <div class="news-card"  data-aos="fade-up" data-aos-delay="100">
           <div class="news-image">

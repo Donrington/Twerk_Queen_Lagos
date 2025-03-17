@@ -11,31 +11,54 @@
     
         <!-- Dashboard Stats -->
         <section class="dashboard-content">
+                  <!-- Flash Messages -->
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                      <div class="alert alert-info">
+                          {% for category, message in messages %}
+                              <div class="alert-message">{{ message }}</div>
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+                  {% endwith %}
+      
           <div class="stats-grid">
-            <div class="stats-card">
+            <a href="{{url_for('admin_contestants')}}">
+              <div class="stats-card">
               <h3 class="stats-card-title">Total Contestants</h3>
-              <p class="stats-card-value">{{ total_contestants }}</p>
+             <p class="stats-card-value">{{ total_contestants }}</p>
               <span class="stats-card-icon"><i class="fas fa-user-friends"></i></span>
             </div>
+          </a> 
     
-            <div class="stats-card">
+            <a href="{{url_for('admin_votes')}}">
+              <div class="stats-card">
+                
               <h3 class="stats-card-title">Total Votes</h3>
               <p class="stats-card-value">{{ total_votes }}</p>
               <span class="stats-card-icon"><i class="fas fa-vote-yea"></i></span>
             </div>
-    
-            <div class="stats-card">
+            
+            </a>
+
+            <a href="{{url_for('admin_blog')}}">
+              <div class="stats-card">
+           
               <h3 class="stats-card-title">Active Blog Posts</h3>
               <p class="stats-card-value">{{ active_blog_posts }}</p>
               <span class="stats-card-icon"><i class="fas fa-blog"></i></span>
             </div>
+           
+          </a>
     
+          <a href="{{url_for('admin_contacts')}}">
             <div class="stats-card">
               <h3 class="stats-card-title">New Contacts</h3>
               <p class="stats-card-value">{{ new_contacts }}</p>
               <span class="stats-card-icon"><i class="fas fa-envelope"></i></span>
             </div>
-          </div>
+         
+        </a>
         </section>
     </div>
     

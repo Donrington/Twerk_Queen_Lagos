@@ -42,7 +42,8 @@ def init_routes(app):
 
     @app.route('/aboutus')
     def aboutus():
-        return render_template('user/aboutus.html', pagename="TwerkQueenLagos | About")
+        posts = BlogPost.query.filter_by(is_published=True).order_by(BlogPost.created_on.desc()).all()
+        return render_template('user/aboutus.html', pagename="TwerkQueenLagos | About", posts=posts)
 
     # Add to your routes.py
     @app.route('/contact', methods=['GET', 'POST'])
