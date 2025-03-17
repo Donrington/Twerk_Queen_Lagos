@@ -172,14 +172,31 @@
 
     <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
   AOS.init({
     offset: 120,
     duration: 600,
     once: true,
   });
 });
-        window.addEventListener("load", () => {
+// OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+window.addEventListener("scroll", () => {
+const navbar = document.getElementById("mainNav");
+if (window.scrollY > 50) {
+  navbar.classList.add("scrolled");
+} else {
+  navbar.classList.remove("scrolled");
+}
+});
+
+// RESPONSIVE TOGGLE FOR HAMBURGER MENU
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger.addEventListener("click", () => {
+hamburger.classList.toggle("open");
+navMenu.classList.toggle("active");
+});     window.addEventListener("load", () => {
     // Keep loader visible for 3 seconds after page load completes
     setTimeout(() => {
       document.getElementById("pageLoader").style.display = "none";

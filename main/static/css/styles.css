@@ -219,7 +219,7 @@ nav {
 .bar {
   width: 30px;
   height: 3px;
-  background: #fff;
+  background: #fff !important;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
