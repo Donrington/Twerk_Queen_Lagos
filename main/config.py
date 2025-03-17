@@ -8,20 +8,20 @@ from os import getenv
 # host = getenv('AMANIGO_HOST')
 
 
-# config = {
-#     'user': 'rokeyla_user',
-#     'password': 'nU6gniCxu66hIvptwYHj4G4WMoWLaMmJ',
-#     'host': 'dpg-ct2gbud6l47c73c92p3g-a.oregon-postgres.render.com',
-#     'database': 'twerkqueenlagos'
-# }
+config = {
+    'user': 'tql',
+    'password': 'zvXDL5HncjJXFpQAi5nXMxmG4orJtCsg',
+    'host': 'dpg-cvbn8llds78s73amooi0-a.oregon-postgres.render.com',
+    'database': 'twerkqueenlagos'
+}
 
 # Connect to PostgreSQL using psycopg2
-# connection = psycopg2.connect(
-#     user=config['user'],
-#     password=config['password'],
-#     host=config['host'],
-#     database=config['database']
-# )
+connection = psycopg2.connect(
+    user=config['user'],
+    password=config['password'],
+    host=config['host'],
+    database=config['database']
+)
 
 
 SECRET_KEY = "THTD673&?/YHG/@H393_YEU"
@@ -32,9 +32,9 @@ ADMIN_PROFILE_PATH = "main/static/uploads/admins/"
 PRODUCT_UPLOADER = "main/static/products/"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 # SQLALCHEMY_DATABASE_URI=f"mysql+mysqlconnector://{user}:{password}@{host}/{database}"
-SQLALCHEMY_DATABASE_URI="mysql+mysqlconnector://root@127.0.0.1/twerkqueenlagos"
+# SQLALCHEMY_DATABASE_URI="mysql+mysqlconnector://root@127.0.0.1/twerkqueenlagos"
 
-# SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://rokeyla_user:nU6gniCxu66hIvptwYHj4G4WMoWLaMmJ@dpg-ct2gbud6l47c73c92p3g-a.oregon-postgres.render.com/rokeyla"
+SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://tql:zvXDL5HncjJXFpQAi5nXMxmG4orJtCsg@dpg-cvbn8llds78s73amooi0-a.oregon-postgres.render.com/twerkqueenlagos"
 
 STRIPE_PUBLISHABLE_KEY = 'your_publishable_key'
 STRIPE_SECRET_KEY = 'your_secret_key'
