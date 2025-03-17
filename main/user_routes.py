@@ -185,7 +185,7 @@ def init_routes(app):
     @app.route('/blog/<slug>')
     def post_detail(slug):
         post = BlogPost.query.filter_by(slug=slug, is_published=True).first_or_404()
-        return render_template('user/post_detail.html', post=post, pagename=f"TwerkQueenLagos | {post.title}")
+        return render_template('user/blogdetails.html', post=post, pagename=f"TwerkQueenLagos | {post.title}")
         
     @app.route('/eliminate')
     def eliminate():
