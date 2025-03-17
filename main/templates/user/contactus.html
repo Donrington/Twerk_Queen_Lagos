@@ -3,6 +3,67 @@
 {%block customcss%}
 
 <link rel="stylesheet" href="../../static/css/contactus.css">
+<style>
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+  
+  .social-links a {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    transform: translateY(-3px);
+  }
+
+  .hash{
+    color:#fff;
+  }
+
+  .scard p{
+    color: #fff;
+  }
+  
+  .fa-instagram:hover { color: #E1306C; }
+  .fa-facebook-f:hover { color: #1877F2; }
+  .fa-snapchat-ghost:hover { color: #FFFC00; }
+  .fa-tiktok:hover { color: #000000; }
+  
+  /* Social Media Card */
+  .social-card {
+    background: linear-gradient(135deg, #fa583f 0%, #ff2a5f 100%);
+  }
+  
+  .social-card .social-links a {
+    color: white;
+  }
+
+    
+
+  .social-handle {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+  
+  /* Responsive Social Links */
+  @media (max-width: 768px) {
+    .social-links {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .social-links a {
+      font-size: 1.2rem;
+    }
+  }
+
+  </style>
 {%endblock customcss%}
 
   {%block content%}
@@ -84,9 +145,42 @@
           </p>
           <a href="#">Press Info &rarr;</a>
         </div>
-      </div>
+
+
+          <div class="contact-card social-card scard">
+            <div class="card-icon hash">
+              <i class="fas fa-hashtag"></i>
+            </div>
+            <h3>Social Media</h3>
+            <p>
+              Follow our journey, behind-the-scenes content, and daily dance inspiration!
+            </p>
+            <div class="social-links">
+              <a href="https://instagram.com/twerkqueenlagos" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://facebook.com/twerkQueenLagos" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://snapchat.com/add/twerkQueenlagos" target="_blank">
+                <i class="fab fa-snapchat-ghost"></i>
+              </a>
+              <a href="https://tiktok.com/@twerkqueenlagos" target="_blank">
+                <i class="fab fa-tiktok"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+    
     </div>
   </section>
+  <!-- Add this CSS -->
+
+  
+
+  
+  <!-- Modified Contact Hero Info -->
+
   <section class="contact-hero-section">
     <div class="contact-hero-background">
       <div class="contact-hero-container">
@@ -131,14 +225,71 @@
   
           <!-- Additional Info (Location, phone, email) -->
           <ul class="contact-hero-details">
-            <li><i class="fas fa-map-marker-alt"></i> 5 Washington Square, Lagos, NG</li>
+            <li><i class="fas fa-map-marker-alt"></i> 273A Ajose Adeogun St, Victoria Island,  Lagos</li>
             <li><i class="fas fa-phone-alt"></i> +234 8123 4567</li>
-            <li><i class="fas fa-envelope"></i> info@twerkqueenlagos.com</li>
+            <li><i class="fas fa-envelope"></i> info.vhl@gmail.com</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="contact-hero-info">
+      <!-- Existing content... -->
+      
+      <!-- Social Media Links -->
+      <div class="social-links">
+        <a href="https://instagram.com/twerkqueenlagos" target="_blank">
+          <i class="fab fa-instagram"></i>
+          <span class="social-handle">@twerkqueenlagos</span>
+        </a>
+        <a href="https://facebook.com/twerkQueenLagos" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+          <span class="social-handle">/twerkQueenLagos</span>
+        </a>
+        <a href="https://snapchat.com/add/twerkQueenlagos" target="_blank">
+          <i class="fab fa-snapchat-ghost"></i>
+          <span class="social-handle">twerkQueenlagos</span>
+        </a>
+        <a href="https://tiktok.com/@twerkqueenlagos" target="_blank">
+          <i class="fab fa-tiktok"></i>
+          <span class="social-handle">@twerkqueenlagos</span>
+        </a>
+      </div>
+    </div>
+  
+  </section>
+
+    <!-- Modified Contact Cards Section -->
+<!-- <section>
+  <div class="contact-cards">
+
+    <div class="contact-card social-card">
+      <div class="card-icon">
+        <i class="fas fa-hashtag"></i>
+      </div>
+      <h3>Social Media</h3>
+      <p>
+        Follow our journey, behind-the-scenes content, and daily dance inspiration!
+      </p>
+      <div class="social-links">
+        <a href="https://instagram.com/twerkqueenlagos" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://facebook.com/twerkQueenLagos" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://snapchat.com/add/twerkQueenlagos" target="_blank">
+          <i class="fab fa-snapchat-ghost"></i>
+        </a>
+        <a href="https://tiktok.com/@twerkqueenlagos" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section> -->
 
 
   <section class="faq-section">

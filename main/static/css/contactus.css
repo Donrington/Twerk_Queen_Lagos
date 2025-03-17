@@ -540,7 +540,7 @@ nav ul li.has-dropdown:hover .dropdown {
   .contact-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 40px; 
+    gap: 2rem; 
     justify-items: center; 
     margin-top: 60px; 
   }

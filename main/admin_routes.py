@@ -446,7 +446,7 @@ def init_routes(app):
                         with Image.open(avatar) as img:
                             img.thumbnail((300, 300))
                             img.save(avatar_path)
-                            admin.avatar = f"admins/{filename}"
+                            admin.avatar = f"uploads/admins/avatars/{filename}"
                     except Exception as e:
                         flash('Error processing image', 'error')
                         return redirect(url_for('admin_settings'))
@@ -482,11 +482,9 @@ def init_routes(app):
 
     @app.route('/update-dark-mode', methods=['POST'])
     @admin_login_required
-    @csrf.exempt
     def update_dark_mode():
-        
         session['dark_mode'] = request.json.get('dark_mode', False)
-        return jsonify(success=True)@app.route('/update-dark-mode', methods=['POST'])
+        return jsonify(success=True)
 
 def admin_login_required(f):
     @wraps(f)

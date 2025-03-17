@@ -83,15 +83,14 @@
       <div class="header-right">
         <!-- Dark Mode Toggle -->
    <!-- In your admin_layout.html -->
-      <div class="theme-toggle">
-        <label for="darkModeToggle" class="darkModeToggleLabel">
-          <input type="checkbox" id="darkModeToggle" {% if session.get('dark_mode') %}checked{% endif %}>
-          <span class="toggle-handle"></span>
-          <i class="fas fa-moon toggle-icon moon-icon"></i>
-          <i class="fas fa-sun toggle-icon sun-icon"></i>
-        </label>
-      </div>
-
+   <div class="theme-toggle">
+    <label for="darkModeToggle" class="darkModeToggleLabel">
+      <input type="checkbox" id="darkModeToggle" {% if session.get('dark_mode') %}checked{% endif %}>
+      <span class="toggle-handle"></span>
+      <i class="fas fa-moon toggle-icon moon-icon"></i>
+      <i class="fas fa-sun toggle-icon sun-icon"></i>
+    </label>
+  </div>
 
         <!-- Search Bar -->
         <div class="search-bar">
@@ -101,9 +100,9 @@
 
         <!-- User Profile -->
         <div class="user-profile" id="userProfileBtn">
-          <img src="{{ url_for('static', filename='uploads/' + admin.avatar) if admin.avatar else url_for('static', filename='avatars/av4.jpg') }}" 
+          <img src="{{ url_for('static', filename=admin.avatar or 'avatars/default.png') }}" 
           alt="User" 
-          class="user-avatar" />
+          class="user-avatar" 
           alt="User" 
           class="user-avatar" />
             <span class="user-name">{{ admin.username }}</span>
@@ -255,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const body = document.body;
   const darkModeToggle = document.getElementById('darkModeToggle');
   const sidebarLogo = document.querySelector('.sidebar-logo');
-  
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   // Initialize from session
   const isDarkMode = {% if session.get('dark_mode') %}true{% else %}false{% endif %};
   
