@@ -20,7 +20,7 @@ config = {
     'user': 'doadmin',
     'password': ' AVNS_TP_LtQ97GH9yS3cHm2O',
     'host': 'app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com',
-    'port': 25060
+    'port': 25060,
     'database': 'defaultdb'
 }
 
