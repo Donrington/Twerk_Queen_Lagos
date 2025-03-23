@@ -593,6 +593,20 @@ nav ul li.has-dropdown:hover .dropdown {
   animation-delay: 0.3s; 
 }
 
+
+.mini-tagline2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  opacity: 0;
+  color: #fa583f;
+  font-weight: bolder;
+  animation: fadeInUp 1.5s ease-out forwards;
+  animation-delay: 0.3s; 
+}
+
 .hero-title {
   font-family: 'Poiret One', cursive;
   font-size: 8rem;
@@ -707,6 +721,9 @@ nav ul li.has-dropdown:hover .dropdown {
   .mini-tagline {
     font-size: 0.85rem;
   }
+      .mini-tagline2 {
+    font-size: 1rem;
+  }
 }
 
 /* Extra small screens (very narrow mobile) */
@@ -720,6 +737,12 @@ nav ul li.has-dropdown:hover .dropdown {
   }
   .mini-tagline {
     font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+    
+  .mini-tagline2 {
+    font-size: 0.9rem;
     letter-spacing: 2px;
   }
   .cta-button {
