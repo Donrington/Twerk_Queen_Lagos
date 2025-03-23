@@ -746,7 +746,13 @@ nav ul li.has-dropdown:hover .dropdown {
 
 
 
+  .instruction-text{
+  font-size: 0.85rem;
+  color: #fa583f;
+  margin-top: 5px;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   
+}
 
 
 /* FOOTER SECTION */
