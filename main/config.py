@@ -16,25 +16,39 @@ from os import getenv
 # }
 
 
-config = {
-    'user': 'doadmin',
-    'password': ' AVNS_TP_LtQ97GH9yS3cHm2O',
-    'host': 'app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com',
-    'port': 25060,
-    'database': 'defaultdb'
-}
+# config = {
+#     'user': 'doadmin',
+#     'password': ' AVNS_TP_LtQ97GH9yS3cHm2O',
+#     'host': 'app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com',
+#     'port': 25060,
+#     'database': 'defaultdb'
+# }
 
 
 
-# Connect to PostgreSQL using psycopg2
-connection = psycopg2.connect(
-    user=config['user'],
-    password=config['password'],
-    host=config['host'],
-    port=config['port'],
-    database=config['database']
+# # Connect to PostgreSQL using psycopg2
+# connection = psycopg2.connect(
+#     user=config['user'],
+#     password=config['password'],
+#     host=config['host'],
+#     port=config['port'],
+#     database=config['database']
+# )
+
+
+# Load from env if possible
+DATABASE_USER = 'doadmin'
+DATABASE_PASSWORD = 'AVNS_TP_LtQ97GH9yS3cHm2O'
+DATABASE_HOST = 'app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com'
+DATABASE_PORT = '25060'
+DATABASE_NAME = 'defaultdb'
+
+SQLALCHEMY_DATABASE_URI = (
+    f"postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}"
+    f"@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}?sslmode=require"
 )
 
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 SECRET_KEY = "THTD673&?/YHG/@H393_YEU"
 WTF_CSRF_ENABLED= True
@@ -50,7 +64,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
 
 
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://doadmin:AVNS_TP_LtQ97GH9yS3cHm2O@app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com:25060/defaultdb"
+# SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://doadmin:AVNS_TP_LtQ97GH9yS3cHm2O@app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com:25060/defaultdb"
 
 STRIPE_PUBLISHABLE_KEY = 'your_publishable_key'
 STRIPE_SECRET_KEY = 'your_secret_key'
