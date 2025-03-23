@@ -20,6 +20,7 @@ config = {
     'user': 'doadmin',
     'password': ' AVNS_TP_LtQ97GH9yS3cHm2O',
     'host': 'app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com',
+    'port': 25060
     'database': 'defaultdb'
 }
 
@@ -30,6 +31,7 @@ connection = psycopg2.connect(
     user=config['user'],
     password=config['password'],
     host=config['host'],
+    port=config['port'],
     database=config['database']
 )
 
@@ -48,7 +50,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
 
 
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://doadmin:app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com/defaultdb"
+SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://doadmin:AVNS_TP_LtQ97GH9yS3cHm2O@app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com:25060/defaultdb"
 
 STRIPE_PUBLISHABLE_KEY = 'your_publishable_key'
 STRIPE_SECRET_KEY = 'your_secret_key'
