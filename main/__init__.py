@@ -18,7 +18,6 @@ def create_app():
 
     db.init_app(app)
     migrate = Migrate(app, db)
-    socketio = SocketIO(app)
     csrf.init_app(app)
     mail.init_app(app)
 
@@ -26,6 +25,6 @@ def create_app():
         user_routes.init_routes(app)  # Register user routes
         admin_routes.init_routes(app)  # Register admin routes
 
-    return app, socketio
+    return app
 
-app, socketio = create_app()  # Ensure app is globally available
+app = create_app()  # Ensure app is globally available
