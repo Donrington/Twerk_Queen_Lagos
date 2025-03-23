@@ -44,10 +44,9 @@ DATABASE_PORT = '25060'
 DATABASE_NAME = 'defaultdb'
 
 SQLALCHEMY_DATABASE_URI = (
-    f"postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}"
-    f"@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}?sslmode=require"
+    "postgresql+psycopg2://doadmin:AVNS_TP_LtQ97GH9yS3cHm2O"
+    "@app-xxx-do-user-xxx.l.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
 )
-
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 SECRET_KEY = "THTD673&?/YHG/@H393_YEU"
