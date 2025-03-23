@@ -161,12 +161,19 @@ def init_routes(app):
             db.session.add(new_contestant)
             db.session.commit()
 
+            if file_size > app.config['MAX_CONTENT_LENGTH']:
+              flash('File too large! Maximum allowed size is 2MB.', 'danger')
+              return redirect(url_for('register'))
+
             flash('Registration successful! You are now in the contest.', 'success')
-            return redirect(url_for('register'))
+            return redirect(url_for('registration_success'))
         
         return render_template('user/register.html',pagename="TwerkQeenLagos | Registration")
         
-
+    @app.route('/register/success')
+    def registration_success():
+        return render_template('user/registration_success.html', pagename="TwerkQueenLagos | Registration Success")
+        
     @app.route('/wildcard')
     def wildcard():
         return render_template('user/wildcard.html', pagename="TwerkQueenLagos | Wildcard Battles")
