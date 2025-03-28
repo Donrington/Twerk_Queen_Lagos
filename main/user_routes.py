@@ -81,7 +81,8 @@ def init_routes(app):
 
 
    
-   
+
+
 # Set the maximum file size (2MB) for security purposes
     app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2MB file size limit
 
@@ -176,6 +177,17 @@ def init_routes(app):
         
         return render_template('user/register.html', pagename="TwerkQeenLagos | Registration")
 
+    @app.route('/register/success')
+    def registration_success():
+        return render_template('user/registration_success.html', pagename="TwerkQueenLagos | Registration Success")
+
+    @app.route('/wildcard')
+    def wildcard():
+        return render_template('user/wildcard.html', pagename="TwerkQueenLagos | Wildcard Battles")
+
+    @app.route('/finals')
+    def finals():
+        return render_template('user/final.html', pagename="TwerkQueenLagos | Finals")
     
     
     @app.route('/blog')
