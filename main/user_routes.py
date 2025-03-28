@@ -7,6 +7,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from functools import wraps
 from werkzeug.security import generate_password_hash,check_password_hash
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import RequestEntityTooLarge
 from flask_login import current_user, login_required
 from flask import * 
 from markupsafe import escape
@@ -81,6 +82,7 @@ def init_routes(app):
 
    
    
+# Set the maximum file size (2MB) for security purposes
     app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2MB file size limit
 
     # Ensure upload directory exists
@@ -92,6 +94,13 @@ def init_routes(app):
     def allowed_file(filename):
         """Check if the file has an allowed extension."""
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+# Error handler to catch requests with large files
+    @app.errorhandler(RequestEntityTooLarge)
+    def handle_file_too_large(error):
+        flash('File too large! Maximum allowed size is 2MB.', 'danger')
+        # Redirect back to the registration form or a relevant page
+        return redirect(url_for('register'))
 
     @app.route('/register', methods=['GET', 'POST'])
     def register():
@@ -132,7 +141,8 @@ def init_routes(app):
                 photo_filename = secure_filename(passport_photo.filename)
                 file_path = os.path.join(app.config['USER_PROFILE_PATH'], photo_filename)
 
-                # Check file size
+                # Since Flask will already catch files >2MB (due to MAX_CONTENT_LENGTH),
+                # the following manual file size check is only reached for valid sizes.
                 passport_photo.seek(0, os.SEEK_END)
                 file_size = passport_photo.tell()
                 passport_photo.seek(0)
@@ -161,26 +171,11 @@ def init_routes(app):
             db.session.add(new_contestant)
             db.session.commit()
 
-            if file_size > app.config['MAX_CONTENT_LENGTH']:
-              flash('File too large! Maximum allowed size is 2MB.', 'danger')
-              return redirect(url_for('register'))
-
             flash('Registration successful! You are now in the contest.', 'success')
             return redirect(url_for('registration_success'))
         
-        return render_template('user/register.html',pagename="TwerkQeenLagos | Registration")
-        
-    @app.route('/register/success')
-    def registration_success():
-        return render_template('user/registration_success.html', pagename="TwerkQueenLagos | Registration Success")
-        
-    @app.route('/wildcard')
-    def wildcard():
-        return render_template('user/wildcard.html', pagename="TwerkQueenLagos | Wildcard Battles")
+        return render_template('user/register.html', pagename="TwerkQeenLagos | Registration")
 
-    @app.route('/finals')
-    def finals():
-        return render_template('user/final.html', pagename="TwerkQueenLagos | Finals")
     
     
     @app.route('/blog')
