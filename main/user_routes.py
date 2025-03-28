@@ -92,7 +92,7 @@ def init_routes(app):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
     def allowed_file(filename):
-        """Check if the file has an allowed extension."""
+        
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Error handler to catch requests with large files
