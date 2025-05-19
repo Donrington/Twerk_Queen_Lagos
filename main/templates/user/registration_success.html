@@ -1,0 +1,242 @@
+{% extends 'user/generallayout.html' %}
+
+{% block customcss %}
+<link rel="stylesheet" href="../../static/css/competition.css">
+<style>
+/* Container for the success section */
+.success-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(250, 88, 63, 0.2) 0%, #000 100%);
+  overflow: hidden;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Subtle background animation using pseudo-element */
+.success-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 180deg at 50% 50%, rgba(250,88,63,0.2), rgba(255,255,255,0), rgba(250,88,63,0.2));
+  animation: spin 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Rotation animation for the conic gradient */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Glass card container */
+.success-card {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 40px;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* Title / heading */
+.success-card h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-family: 'Poiret One', cursive;
+  letter-spacing: 2px;
+  color: #fa583f;
+}
+
+/* Paragraph styles */
+.success-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  color: #fdfdfd;
+}
+
+/* Emphasis / highlight text */
+.success-card strong {
+  color: #fa583f;
+}
+
+/* Animated check icon or success icon */
+.success-icon {
+  font-size: 4rem;
+  color: #00d26a;
+  margin-bottom: 1rem;
+  animation: pulse 1.5s infinite;
+}
+
+/* Pulse animation for success icon */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Buttons */
+.success-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.success-btn {
+  background: #fa583f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.3s;
+}
+.success-btn:hover {
+  background: #d94e39;
+  transform: translateY(-3px);
+}
+
+/* Fade In Up for the card */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+{% endblock customcss %}
+
+{% block content %}
+<section class="success-section">
+  <div class="success-card">
+    <!-- Animated success icon -->
+    <div class="success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+
+    <h2>Registration Successful!</h2>
+    <p>Thank you for registering for <strong>Twerk Queen Lagos</strong>! You’re now officially in the contest.</p>
+
+    <p>
+      <strong>Next Step:</strong> Kindly forward your twerk video (under 2 minutes) to 
+      <strong><a href="mailto:https://submit.twerkqueenlagos.com" style="color: #fff; text-decoration: underline;">submit.twerkqueenlagos.com</a></strong>
+      for processing. Make sure it’s clear, well-lit, and shows off your best moves!
+    </p>
+
+    <p>
+      We can’t wait to see your performance. Good luck and keep twerking!
+    </p>
+
+    <div class="success-buttons">
+      <a href="{{ url_for('register') }}" class="success-btn">Register Another</a>
+      <a href="{{ url_for('index') }}" class="success-btn">Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<a id="scroll-up" class="scroll-up" href="#">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path
+        fill="#ffffff"
+        d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"
+      ></path>
+    </svg>
+  </a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({
+      offset: 120,
+      duration: 600,
+      once: true,
+    });
+  });
+
+
+// OPTIONAL: Add a scroll effect if you want the nav to darken/shrink on scroll
+window.addEventListener("scroll", () => {
+  const navbar = document.getElementById("mainNav");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+
+// RESPONSIVE TOGGLE FOR HAMBURGER MENU
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("open");
+  navMenu.classList.toggle("active");
+});
+
+
+
+
+
+
+window.addEventListener("load", () => {
+  // Keep loader visible for 3 seconds after page load completes
+  setTimeout(() => {
+    document.getElementById("pageLoader").style.display = "none";
+  }, 3000);
+});
+
+
+
+
+const scrollUpBtn = document.getElementById("scroll-up");
+
+// Show/Hide button on scroll
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100) {
+    // User has scrolled down > 100px
+    scrollUpBtn.classList.add("_show-scroll");
+  } else {
+    // Near the top
+    scrollUpBtn.classList.remove("_show-scroll");
+  }
+});
+
+// Smooth scroll to top when button is clicked
+scrollUpBtn.addEventListener("click", (e) => {
+  e.preventDefault(); // Prevent default anchor jump
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+setTimeout(() => {
+  const alerts = document.querySelectorAll('.flash-messages .alert');
+  alerts.forEach(alert => {
+    alert.style.transition = 'opacity 0.5s ease-out';
+    alert.style.opacity = '0';
+    setTimeout(() => alert.remove(), 500);
+  });
+}, 5000);
+
+</script>
+{% endblock content %}
