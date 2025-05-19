@@ -1,98 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Basic Page Needs -->
-    <meta charset="UTF-8" />
-    <!-- CSRF Token for security (Flask/WTF) -->
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <!-- Responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-    <!-- Page Title -->
-    <title>{{ pagename }}</title>
-  
-    <!-- Primary Meta Tags (Admin) -->
-    <!-- Typically, admin pages use "noindex, nofollow" to avoid public search indexing -->
-    <meta name="description" content="Twerk Queen Lagos Admin Dashboard for managing contestants, votes, and blog posts." />
-    <meta name="keywords" content="Twerk, Twerking, Dance Competition, Lagos, Admin Dashboard" />
-    <meta name="robots" content="noindex, nofollow" />
-  
-    <!-- Canonical Link (Optional for admin, but included if you have multiple admin URLs) -->
-    <link rel="canonical" href="https://www.twerkqueenlagos.com/admin" />
-  
-    <!-- Open Graph / Facebook (Optional for Admin) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Twerk Queen Lagos Admin Dashboard" />
-    <meta property="og:description" content="Manage Twerk Queen Lagos contestants, votes, blog posts, and more." />
-    <meta property="og:url" content="https://www.twerkqueenlagos.com/admin" />
-    <meta property="og:site_name" content="Twerk Queen Lagos Admin" />
-    <meta property="og:image" content="https://www.twerkqueenlagos.com/static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png" />
-  
-    <!-- Twitter Card (Optional for Admin) -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Twerk Queen Lagos Admin" />
-    <meta name="twitter:description" content="Manage Twerk Queen Lagos contestants, track votes, and more in our admin dashboard." />
-    <meta name="twitter:image" content="https://www.twerkqueenlagos.com/static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png" />
-    <meta name="twitter:site" content="@TwerkQueenLagos" />
-  
-    <!-- Favicon / Apple Touch Icon -->
-    <link
-      rel="icon"
-      href="https://www.twerkqueenlagos.com/static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png"
-      type="image/png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="https://www.twerkqueenlagos.com/static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png"
-    />
-  
-    <!-- JSON-LD Structured Data (Optional for Admin) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Twerk Queen Lagos",
-      "url": "https://www.twerkqueenlagos.com/",
-      "logo": "https://www.twerkqueenlagos.com/static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png",
-      "sameAs": [
-        "https://www.facebook.com/TwerkQueenLagos",
-        "https://www.instagram.com/TwerkQueenLagos",
-        "https://twitter.com/TwerkQueenLagos"
-      ],
-      "description": "Twerk Queen Lagos is a monthly dance competition that offers the winner N10 million! Join us every last Thursday for an unforgettable showdown.",
-      "founder": "VHL Presents",
-      "foundingDate": "2025",
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "email": "info.vhl@gmail.com",
-        "contactType": "customer support",
-        "areaServed": "NG"
-      }]
-    }
-    </script>
-  
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poiret+One&display=swap"
-      rel="stylesheet"
-    />
-  
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-  
-    <!-- Animate on Scroll (AOS) -->
-    <link
-      href="https://unpkg.com/aos@2.3.1/dist/aos.css"
-      rel="stylesheet"
-    />
-  
-    <!-- Admin Dashboard CSS -->
-    <link rel="stylesheet" href="../../static/css/admindash.css" />
-  </head>
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset="UTF-8" />
+  <!-- CSRF Token for security (Flask/WTF) -->
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Page Title -->
+  <title>{{ pagename }}</title>
+
+  <!-- Primary Meta Tags (Admin) -->
+  <!-- Typically, admin pages use "noindex, nofollow" to avoid public search indexing -->
+  <meta name="description" content="Twerk Queen Lagos Admin Dashboard for managing contestants, votes, and blog posts." />
+  <meta name="keywords" content="Twerk, Twerking, Dance Competition, Lagos, Admin Dashboard" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Canonical Link (Optional for admin, but included if you have multiple admin URLs) -->
+  <link rel="canonical" href="https://www.twerkqueenlagos.com/admin" />
+
+  <!-- Open Graph / Facebook (Optional for Admin) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Twerk Queen Lagos Admin Dashboard" />
+  <meta property="og:description" content="Manage Twerk Queen Lagos contestants, votes, blog posts, and more." />
+  <meta property="og:url" content="https://www.twerkqueenlagos.com/admin" />
+  <meta property="og:site_name" content="Twerk Queen Lagos Admin" />
+  <meta property="og:image" content="https://www.twerkqueenlagos.com/static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png" />
+
+  <!-- Twitter Card (Optional for Admin) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Twerk Queen Lagos Admin" />
+  <meta name="twitter:description" content="Manage Twerk Queen Lagos contestants, track votes, and more in our admin dashboard." />
+  <meta name="twitter:image" content="https://www.twerkqueenlagos.com/static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png" />
+  <meta name="twitter:site" content="@TwerkQueenLagos" />
+
+  <!-- Favicon / Apple Touch Icon -->
+  <link
+    rel="icon"
+    href="https://www.twerkqueenlagos.com/../../static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png"
+    type="image/png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="https://www.twerkqueenlagos.com/../../static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png"
+  />
+
+  <!-- JSON-LD Structured Data (Optional for Admin) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Twerk Queen Lagos",
+    "url": "https://www.twerkqueenlagos.com/",
+    "logo": "https://www.twerkqueenlagos.com/../../static/logo/TWERK-QUEEN-LAGOS-02-logo-red.png",
+    "sameAs": [
+      "https://www.facebook.com/TwerkQueenLagos",
+      "https://www.instagram.com/TwerkQueenLagos",
+      "https://twitter.com/TwerkQueenLagos"
+    ],
+    "description": "Twerk Queen Lagos is a monthly dance competition that offers the winner N10 million! Join us every last Thursday for an unforgettable showdown.",
+    "founder": "VHL Presents",
+    "foundingDate": "2025",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "email": "info.vhl@gmail.com",
+      "contactType": "customer support",
+      "areaServed": "NG"
+    }]
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poiret+One&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <!-- Animate on Scroll (AOS) -->
+  <link
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    rel="stylesheet"
+  />
+
+  <!-- Admin Dashboard CSS -->
+  <link rel="stylesheet" href="../../static/css/admindash.css" />
+</head>
 <body>
 
   <!-- Loader Overlay -->

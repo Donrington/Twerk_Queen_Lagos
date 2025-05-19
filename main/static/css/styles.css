@@ -723,8 +723,7 @@ nav ul li.has-dropdown:hover .dropdown {
   .mini-tagline {
     font-size: 0.85rem;
   }
-
-  .mini-tagline2 {
+      .mini-tagline2 {
     font-size: 1rem;
   }
 }
@@ -743,11 +742,11 @@ nav ul li.has-dropdown:hover .dropdown {
     letter-spacing: 2px;
   }
 
+    
   .mini-tagline2 {
     font-size: 0.9rem;
     letter-spacing: 2px;
   }
-
   .cta-button {
     padding: 10px 25px;
     font-size: 0.85rem;

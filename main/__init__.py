@@ -28,4 +28,4 @@ def create_app():
 
     return app, socketio
 
-app, socketio = create_app()  # Ensure app is globally available
+app, socketio = create_app()   # Ensure app is globally available
