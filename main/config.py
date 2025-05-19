@@ -16,13 +16,13 @@ from os import getenv
 # }
 
 
-# config = {
-#     'user': 'doadmin',
-#     'password': ' AVNS_TP_LtQ97GH9yS3cHm2O',
-#     'host': 'app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com',
-#     'port': 25060,
-#     'database': 'defaultdb'
-# }
+config = {
+    'user': 'doadmin',
+    'password': ' AVNS_TP_LtQ97GH9yS3cHm2O',
+    'host': 'app-549e29aa-2f2e-49f3-8e0b-5a38d226801c-do-user-19983151-0.l.db.ondigitalocean.com',
+    'port': 25060,
+    'database': 'defaultdb'
+}
 
 
 # config = {
@@ -67,7 +67,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 # SQLALCHEMY_DATABASE_URI=f"mysql+mysqlconnector://{user}:{password}@{host}/{database}"
 # SQLALCHEMY_DATABASE_URI="mysql+mysqlconnector://root@127.0.0.1/twerkqueenlagos"
 
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://tql:zvXDL5HncjJXFpQAi5nXMxmG4orJtCsg@dpg-cvbn8llds78s73amooi0-a.oregon-postgres.render.com/twerkqueenlagos"
+# SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://tql:zvXDL5HncjJXFpQAi5nXMxmG4orJtCsg@dpg-cvbn8llds78s73amooi0-a.oregon-postgres.render.com/twerkqueenlagos"
 
 
 
