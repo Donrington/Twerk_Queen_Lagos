@@ -3,6 +3,53 @@
 {%block customcss%}
 
 <link rel="stylesheet" href="../../static/css/registration.css">
+
+<style>
+.flash-messages {
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.flash-messages .alert {
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Success */
+.flash-messages .alert-success {
+  border-left: 6px solid #28a745;
+}
+
+/* Danger / Error */
+.flash-messages .alert-danger {
+  border-left: 6px solid #dc3545;
+}
+
+/* Warning */
+.flash-messages .alert-warning {
+  border-left: 6px solid #ffc107;
+  color: #fff3cd;
+}
+
+/* Info */
+.flash-messages .alert-info {
+  border-left: 6px solid #17a2b8;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 {%endblock customcss%}
 
   {%block content%}
@@ -92,8 +139,8 @@
       </div>
   
       <div class="form-group">
-          <label for="state">State of Origin</label>
-          <input type="text" id="state" name="state" placeholder="Enter Your State.." required />
+          <label for="state">Social Media Handle</label>
+          <input type="text" id="state" name="state" placeholder="Tiktok: @Janedoe or IG: @Janedoe.." required />
       </div>
   
       <div class="form-group">
@@ -112,9 +159,16 @@
                   </label>
               </div>
           </div>
+
+                  <!-- Image Preview -->
+        <div class="preview-container">
+          <img id="imagePreview" src="" alt="Passport Preview" class="image-preview hidden" />
+        </div>
           <small class="instruction-text">
               Passport photo (max 2MB, JPG/PNG). Must be clear and well-lit.
           </small>
+
+
       </div>
   
       <button type="submit" class="submit-btn">Register</button>
@@ -208,6 +262,35 @@ window.addEventListener("load", () => {
       behavior: "smooth"
     });
   });
+
+  setTimeout(() => {
+    const alerts = document.querySelectorAll('.flash-messages .alert');
+    alerts.forEach(alert => {
+      alert.style.transition = 'opacity 0.5s ease-out';
+      alert.style.opacity = '0';
+      setTimeout(() => alert.remove(), 500);
+    });
+  }, 5000);
+
+
+  document.getElementById("fileInput").addEventListener("change", function (e) {
+  const file = e.target.files[0];
+  const preview = document.getElementById("imagePreview");
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      preview.src = event.target.result;
+      preview.classList.remove("hidden");
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+    preview.classList.add("hidden");
+  }
+});
 
 </script>
 

@@ -743,10 +743,42 @@ nav ul li.has-dropdown:hover .dropdown {
     }
   }
 
-
-
-
   
+
+.instruction-text{
+  font-size: 0.85rem;
+  color: #fa583f;
+  margin-top: 5px;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  
+}
+
+.preview-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.image-preview {
+  max-width: 100%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+.image-preview.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .image-preview {
+    width: 120px;
+    height: 120px;
+  }
+}
 
 
 /* FOOTER SECTION */

@@ -49,9 +49,9 @@
 
     <!-- Subheading with Montserrat -->
     <p class="hero-subtitle">
-      ONE Finale Winner Takes Home 
-      <strong>N10 MILLION</strong><br/>
-      Every Last Monday of the Month!!!
+      ONE Finale Winner Takes Home <br>
+      <strong class="mini-tagline2">N10 MILLION!!</strong><br/>
+      Every Last Saturday of the Month
     </p>
     
     <!-- Arrow Down: on click, it scrolls to #competition -->
@@ -273,15 +273,33 @@
     
           <!-- CTA Buttons -->
           <div class="empower-cta">
-            <a href="{{url_for('register')}}" class="btn primary-btn">Join</a>
+            <a 
+            href="https://drive.google.com/file/d/1IUFv_6zhn266I4lW4MkWXRFk_ZSN94qs/preview"
+            class="btn primary-btn"
+            target="_blank"
+          >
+            <i class="fas fa-play-circle"></i> Watch Video
+          </a>
             <a href="{{url_for('aboutus')}}" class="btn outline-btn">Learn More &rarr;</a>
           </div>
         </div>
     
         <!-- Image Column -->
-        <div class="empower-image" data-aos="fade-left" data-aos-duration="1000">
-          <img src="../../static/images/group2.jpg" alt="Twerk Dancer" loading="lazy"> 
-        </div>
+   <!-- Replace the old link with a 'Watch Video' button that scrolls to the embed -->
+   <div class="empower-image" data-aos="fade-left" data-aos-duration="1000">
+    <img src="../../static/images/group2.jpg" alt="Twerk Dancer" loading="lazy"> 
+  </div>
+
+<!-- Later in the same template, embed the video with an <iframe> -->
+<!-- <div id="videoEmbed" style="margin-top: 20px;">
+  <iframe 
+    src="https://drive.google.com/file/d/1IUFv_6zhn266I4lW4MkWXRFk_ZSN94qs/preview"
+    width="560"
+    height="315"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+  ></iframe>
+</div> -->
       </div>
     </section>
 

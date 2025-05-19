@@ -188,6 +188,8 @@ nav {
 }
 
 
+
+
 .footer_logo {
   width: 10rem;
   height: auto;
@@ -593,6 +595,20 @@ nav ul li.has-dropdown:hover .dropdown {
   animation-delay: 0.3s; 
 }
 
+
+.mini-tagline2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  opacity: 0;
+  color: #fa583f;
+  font-weight: bolder;
+  animation: fadeInUp 1.5s ease-out forwards;
+  animation-delay: 0.3s; 
+}
+
 .hero-title {
   font-family: 'Poiret One', cursive;
   font-size: 8rem;
@@ -707,6 +723,10 @@ nav ul li.has-dropdown:hover .dropdown {
   .mini-tagline {
     font-size: 0.85rem;
   }
+
+  .mini-tagline2 {
+    font-size: 1rem;
+  }
 }
 
 /* Extra small screens (very narrow mobile) */
@@ -722,6 +742,12 @@ nav ul li.has-dropdown:hover .dropdown {
     font-size: 0.75rem;
     letter-spacing: 2px;
   }
+
+  .mini-tagline2 {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
   .cta-button {
     padding: 10px 25px;
     font-size: 0.85rem;
@@ -765,6 +791,28 @@ nav ul li.has-dropdown:hover .dropdown {
 }
 
 
+
+.video-container {
+  position: relative;
+  /* Maintain a 16:9 aspect ratio => 9/16 * 100 = 56.25% */
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+
+  /* Ensures the container scales down for smaller screens */
+  width: 100%;
+  max-width: 800px; /* optional limit for larger desktops */
+  margin: 0 auto;   /* center the container if it's narrower than its parent */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0; /* remove default iframe border, if any */
+}
 
 /* MARQUEE SECTION WRAPPER */
 .marquee-section {
